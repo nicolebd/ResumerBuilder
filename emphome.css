@@ -1,0 +1,94 @@
+#signoutbut {
+	z-index: 999;
+	position:fixed;
+	top: 20;
+	left: 90%;
+	height: 4%;
+	width: 7%;
+	border-radius: 3px;
+	border: 1px solid white;
+	color: white;
+	font-family: verdana;
+	text-align: center;
+	padding-top: 2;
+	font-size: 15;
+}
+
+#wrapper {
+	position: relative;
+	top: 22.4%;
+	height: 78.7%;
+	left: 1.5%;
+	width:97%;
+	background: rgba(255,255,255,1);
+}
+
+#maincontent {
+	margin-left: 2.5%;
+	margin-top: 2.5%;
+	width: 68%;
+	float: left;
+	font-family: tahoma;
+	font-size: 18;
+}
+
+ #maincontent h1 {
+ 	padding: 10;
+ 	padding-bottom: 0;
+ 	color:darkslategrey;
+ 	text-align: left;
+ 	font-size: 30;
+ 	font-family: arial;
+ 	position: relative;
+ 	left:1%;
+ }
+
+ #maincontent p {
+ 	position: relative;
+ 	
+ 	background: rgba(255, 255, 255, 0.5);
+ 	margin-top:0;margin-bottom: 0;
+ 	padding:10;
+ 	padding-left: 25;
+ 	padding-right: 25;
+ 	width: 90%;
+ }
+ .option {
+ 	position: relative;
+ 	width: 80%;
+ 	left: 5%;
+ 	padding: 14px 20px;
+ 	border: 4px solid darkslategrey;
+ 	border-radius: 10px;
+ 	margin: 10px 0;
+ 	outline:none;
+ 	font-family: arial;
+ 	font-size: 20;
+ 	text-align: center;
+}
+
+.option:hover {
+	background-color: lavender;
+	color: darkslategrey;
+}
+
+#rightpanel {
+	float:right;
+	margin-top: 2.5%;
+	height: 90%;
+	width: 28%;
+	font-family: tahoma;
+	font-size: 18;
+	background-color: white;
+	border-left: 1px solid lightgrey;
+}
+
+#img {
+	position: relative;
+	width: 79%;
+	height: 40%;
+	border:1px solid lightgrey;
+	left: 5%;
+	top:5%;
+	padding: 5%;
+}
