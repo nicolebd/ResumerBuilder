@@ -5,8 +5,8 @@
 	</head>
 	<body>
 			<img src="resume.jpg" id = "bgimg"/>
-			<div id ="loginbut"><a href = "login.html" style = "color:inherit;text-decoration: none;">Login</a></div>
-			<div id = "signupbut"><a href = "signup.html" style = "color:inherit;text-decoration: none;">Register</a></div>
+			<div id ="loginbut"><a href = "/login" style = "color:inherit;text-decoration: none;">Login</a></div>
+			<div id = "signupbut"><a href = "/signup" style = "color:inherit;text-decoration: none;">Register</a></div>
 			<div id = "header">
 				<div id = "banner">
 					<h1>R E A T U R E . F I C H</h1>	
@@ -18,7 +18,7 @@
 				<h1>Log In </h1>
 				<hr>
 				<br>
-				<form align = "center" name = "fname">
+				<form align = "center" name = "fname" action="/validate" method="post">
 					<input type = "text" width = "20" name = "user" placeholder = "Your email address"><br>
 					<input type = "password" width = "20" name = "pass" placeholder = "Password" ><br>
 					<input type = "submit" value = "Continue" onclick = "">
