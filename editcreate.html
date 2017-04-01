@@ -1,0 +1,495 @@
+<html>
+	<head>
+		<title>Employee Home | Reature Fich</title>
+		<style type="text/css">
+			#signoutbut {
+	z-index: 999;
+	position:fixed;
+	top: 20;
+	left: 90%;
+	height: 4%;
+	width: 7%;
+	border-radius: 3px;
+	border: 1px solid white;
+	color: white;
+	font-family: verdana;
+	text-align: center;
+	padding-top: 2;
+	font-size: 15;
+}
+#header {
+	left: 0;
+    position: fixed;
+    top: 0;
+    width:100%;
+    height:23%;
+    background-color: darkslategrey;
+    border:1px solid black;
+    z-index: 998;
+}
+#banner {
+	position:relative;
+	top:0;
+	margin-top:-21;
+	height:35%;
+	z-index: 998;
+}
+h1 {
+	position: relative;
+	text-align: center;
+	color: white;
+	font-family: 'Century Gothic';
+	font-size: 60px;
+}
+
+#navbar {
+	background-color: lavender;
+	opacity:0.5;
+	margin-top:29;
+	height:50;
+	top: 0;
+	left:0;
+	z-index: 998;
+}
+#navbar p {
+	position:relative;
+	color:black;
+	font-family: arial;
+	font-size: 20;
+	text-align: center;
+	top:10;
+}
+
+
+#wrapper {
+	position: relative;
+	top: 22.4%;
+	height: 78.7%;
+	left: 1.5%;
+	height: 200%;
+	background: rgba(255,255,255,1);
+}
+
+#maincontent {
+	margin-left: 2.5%;
+	margin-top: 2.5%;
+	width: 68%;
+	float: left;
+	font-family: tahoma;
+	font-size: 18;
+}
+
+ #maincontent h1 {
+ 	padding: 10;
+ 	padding-bottom: 0;
+ 	color:darkslategrey;
+ 	text-align: left;
+ 	font-size: 30;
+ 	font-family: arial;
+ 	position: relative;
+ 	left:1%;
+ }
+
+ #maincontent p {
+ 	position: relative;
+ 	
+ 	background: rgba(255, 255, 255, 0.5);
+ 	margin-top:0;margin-bottom: 0;
+ 	padding:10;
+ 	padding-left: 25;
+ 	padding-right: 25;
+ 	width: 90%;
+ }
+ .option {
+ 	position: relative;
+ 	width: 80%;
+ 	left: 5%;
+ 	padding: 14px 20px;
+ 	border: 4px solid darkslategrey;
+ 	border-radius: 10px;
+ 	margin: 10px 0;
+ 	outline:none;
+ 	font-family: arial;
+ 	font-size: 20;
+ 	text-align: center;
+}
+
+.option:hover {
+	background-color: lavender;
+	color: darkslategrey;
+}
+
+#rightpanel {
+	float:right;
+	margin-top: 4%;
+	height: 40%;
+	width: 28%;
+	font-family: tahoma;
+	font-size: 18;
+	background-color: white;
+	border-left: 1px solid lightgrey;
+}
+
+#img {
+	position: relative;
+	width: 79%;
+	height: 40%;
+	border:1px solid lightgrey;
+	left: 5%;
+	top:5%;
+	padding: 5%;
+}
+
+.formdetails input, select {
+ 	width: 90%;
+ 	padding: 14px 20px;
+ 	border: 1px solid lightgrey;
+ 	border-radius: 10px;
+ 	margin: 10px 0;
+ 	outline:none;
+ 	font-family: arial;
+ 	font-size: 18;
+ }
+
+.formdetails input:focus, select:focus {
+    border: 1px solid grey;
+}
+
+.formdetails input[type=submit] {
+	background-color: coral;
+	color:white;
+}
+		</style>
+	<script type="text/javascript">
+		var ins_num = 1;
+		var exp_num = 1;
+		var skill_num = 1;
+		function checkInst(ele) {
+			var id = ele.id;
+			var num = id.substring(4);
+			other = document.getElementById("other"+num);
+			
+			if (ele.value == "other") {
+				other.disabled = false;
+			}
+			else {
+				other.disabled = true;
+			}
+		}
+		function addInst() {
+			ins_num++;
+
+			var inst = document.createElement("select");
+			var inst_label = document.createElement("Label");
+			inst_label.innerHTML = "Institution&nbsp;" + ins_num + "&nbsp;&nbsp;";
+			inst.innerHTML = "<option>Some school</option><option value = 'other'>Other - enter name</option>";
+			var otherins = document.createElement("input")
+
+			inst.setAttribute("id", "inst" + ins_num);
+			inst.setAttribute("width", "20");
+			inst.setAttribute("style", "display:table-cell; width:100%");
+			inst.setAttribute("onchange", "checkInst(this)");
+
+			otherins.setAttribute("id", "other" + ins_num);
+			otherins.setAttribute("type", "text");
+			otherins.setAttribute("style", "display:table-cell; width:100%");
+			otherins.setAttribute("disabled", true);
+
+			inst_label.setAttribute("for", "inst" + ins_num);
+			inst_label.setAttribute("style", "display:table-cell; width:1px");
+
+			var div1 = document.createElement("div");
+			div1.setAttribute("style", "width:100%;display:table");
+			div1.appendChild(inst_label);
+			div1.appendChild(inst);
+			div1.appendChild(otherins);
+
+			var edu_level = document.createElement("select");
+			var edu_level_label = document.createElement("label");
+			edu_level_label.innerHTML = "Level&nbsp;of&nbsp;Education&nbsp;&nbsp;";
+			edu_level.innerHTML = "<option>Doctorate/Phd</option><option>Master</option><option>Bachelor</option><option>High&nbsp;School</option>";
+			edu_level.setAttribute("id", "level" + ins_num);
+			edu_level.setAttribute("style", "display:table-cell; width:100%");
+
+			edu_level_label.setAttribute("for", "level" + ins_num);
+			edu_level_label.setAttribute("style", "display:table-cell; width:1px");
+
+			var gradyear = document.createElement("input");
+			var gradyear_label = document.createElement("Label");
+			gradyear_label.innerHTML = "&nbsp;Graduation&nbsp;Year&nbsp;&nbsp;";     
+
+			gradyear.setAttribute("type", "number");
+			gradyear.setAttribute("min", "1970");
+			gradyear.setAttribute("max", "2017");
+			gradyear.setAttribute("id", "yop" + ins_num);
+			gradyear.setAttribute("width", "20");
+			gradyear.setAttribute("value", "2017")
+			gradyear.setAttribute("style", "display:table-cell; width:100%");
+
+			gradyear_label.setAttribute("for", "yop" + ins_num);
+			gradyear_label.setAttribute("style", "display:table-cell; width:1px");
+
+			var marks = document.createElement("input");
+			var marks_label = document.createElement("Label");
+			marks_label.innerHTML = "&nbsp;&nbsp;GPA/Percentage&nbsp;&nbsp;";     
+
+			marks.setAttribute("type", "text");
+			marks.setAttribute("id", "marks" + ins_num);
+			marks.setAttribute("width", "20");
+			marks.setAttribute("placeholder", "Final GPA or %")
+			marks.setAttribute("style", "display:table-cell; width:100%");
+
+			marks_label.setAttribute("for", "marks" + ins_num);
+			marks_label.setAttribute("style", "display:table-cell; width:1px");
+
+
+			var div2 = document.createElement("div");
+			div2.setAttribute("style", "width:100%;display:table");
+			div2.appendChild(edu_level_label);
+			div2.appendChild(edu_level);
+			div2.appendChild(gradyear_label);
+			div2.appendChild(gradyear);
+			div2.appendChild(marks_label);
+			div2.appendChild(marks);
+
+			var container = document.getElementById("details");
+			var button = document.getElementById("add_ins");
+			container.insertBefore(document.createElement("br"), button);
+			container.insertBefore(div1, button);
+			container.insertBefore(div2, button);
+		}
+
+	function addExp(){
+			exp_num++;
+
+			var exp = document.createElement("input");
+			var exp_label = document.createElement("Label");
+			exp_label.innerHTML = "Organisation&nbsp;" + exp_num + "&nbsp;&nbsp;";
+
+			exp.setAttribute("id", "exp" + exp_num);
+			exp.setAttribute("width", "20");
+			exp.setAttribute("style", "display:table-cell; width:100%");
+			exp.setAttribute("placeholder", "Name of organisation")
+
+			exp_label.setAttribute("for", "inst" + exp_num);
+			exp_label.setAttribute("style", "display:table-cell; width:1px");
+
+			var desig = document.createElement("input");
+			var desig_label = document.createElement("label");
+			desig_label.innerHTML = "&nbsp;&nbsp;Designation&nbsp;&nbsp;";
+			desig.setAttribute("id", "desig" + exp_num);
+			desig.setAttribute("style", "display:table-cell; width:100%");
+			desig.setAttribute("placeholder", "Designation held")
+
+			desig_label.setAttribute("for", "desig" + exp_num);
+			desig_label.setAttribute("style", "display:table-cell; width:1px");
+			
+			var div1 = document.createElement("div");
+			div1.setAttribute("style", "width:100%;display:table");
+			div1.appendChild(exp_label);
+			div1.appendChild(exp);
+			div1.appendChild(desig_label);
+			div1.appendChild(desig);
+
+			var start = document.createElement("input");
+			var start_label = document.createElement("Label");
+			start_label.innerHTML = "Start&nbsp;Date&nbsp;&nbsp;";     
+
+			start.setAttribute("type", "date");
+			start.setAttribute("id", "start" + exp_num);
+			start.setAttribute("width", "20");
+			start.setAttribute("style", "display:table-cell; width:100%");
+
+			start_label.setAttribute("for", "start" + exp_num);
+			start_label.setAttribute("style", "display:table-cell; width:1px");
+
+			var end = document.createElement("input");
+			var end_label = document.createElement("Label");
+			end_label.innerHTML = "&nbsp;&nbsp;End&nbsp;Date&nbsp;&nbsp;";     
+
+			end.setAttribute("type", "date");
+			end.setAttribute("id", "end" + exp_num);
+			end.setAttribute("width", "20");
+			end.setAttribute("style", "display:table-cell; width:100%");
+
+			end_label.setAttribute("for", "end" + exp_num);
+			end_label.setAttribute("style", "display:table-cell; width:1px");
+
+
+			var div2 = document.createElement("div");
+			div2.setAttribute("style", "width:100%;display:table");
+			div2.appendChild(start_label);
+			div2.appendChild(start);
+			div2.appendChild(end_label);
+			div2.appendChild(end);
+
+			var container = document.getElementById("details");
+			var button = document.getElementById("add_exp");
+			container.insertBefore(document.createElement("br"), button);
+			container.insertBefore(div1, button);
+			container.insertBefore(div2, button);
+	}
+
+	function addSkill(){
+			skill_num++;
+
+			var skill = document.createElement("input");
+			var skill_label = document.createElement("Label");
+			skill_label.innerHTML = "Skill&nbsp;" + skill_num + "&nbsp;&nbsp;";
+
+			skill.setAttribute("id", "skill" + skill_num);
+			skill.setAttribute("type", "text")
+			skill.setAttribute("width", "20");
+			skill.setAttribute("style", "display:table-cell; width:100%");
+			skill.setAttribute("placeholder", "Java/Matlab/MS Office/...")
+			
+			skill_label.setAttribute("for", "skill" + skill_num);
+			skill_label.setAttribute("style", "display:table-cell; width:1px");
+
+			var sk_level = document.createElement("select");
+			var sk_level_label = document.createElement("Label");
+			sk_level_label.innerHTML = "&nbsp;&nbspSkill&nbspLevel&nbsp;&nbsp;";
+			sk_level.innerHTML = "<option value = 'beginner'>Beginner</option><option value = 'intermediate' selected>Intermediate</option><option value = 'advanced'>Advanced</option>";
+
+			sk_level.setAttribute("id", "sk_level" + skill_num);
+			sk_level.setAttribute("width", "20");
+			sk_level.setAttribute("style", "display:table-cell; width:100%");
+			
+			sk_level_label.setAttribute("for", "sk_level" + skill_num);
+			sk_level_label.setAttribute("style", "display:table-cell; width:1px");
+
+			var div1 = document.createElement("div");
+			div1.setAttribute("style", "width:100%;display:table");
+			div1.appendChild(skill_label);
+			div1.appendChild(skill);
+			div1.appendChild(sk_level_label);
+			div1.appendChild(sk_level);
+
+			var container = document.getElementById("details");
+			var button = document.getElementById("add_skill");
+			container.insertBefore(document.createElement("br"), button);
+			container.insertBefore(div1, button);
+	}
+	</script>
+	</head>
+	<body>
+			<div id ="signoutbut"><a href = "login.html" style = "color:inherit;text-decoration: none;">Sign out</a></div>
+
+			<div id = "header">
+				<div id = "banner">
+					<h1>R E A T U R E . F I C H</h1>	
+				</div>
+				<div id = "navbar"><p>Navbar links go here</p></div>
+			</div>
+
+			<div id = "wrapper">
+				<div id = "maincontent">
+					<a href = "emphome.html">&lt;--Back to homepage</a>
+					<h1>Personal details </h1>
+					<hr>
+					
+					<br>
+					<form class = "formdetails" align = "center" name = "fname" id = "details">
+						<div style = "width:100%;display:table">
+							<label for="emp_name" style="display:table-cell; width:1px">Name&nbsp;&nbsp;</label>
+							<input type = "text" width = "20" id = "emp_name" placeholder = "Full name" style="display:table-cell; width:100%" >
+							<label for="dob" style="display:table-cell; width:1px">&nbsp;&nbsp;DOB&nbsp;&nbsp;</label>
+							<input type = "date" width = "20" id = "dob" placeholder = "Date of birth" style="display:table-cell; width:100%" >
+						</div>
+						<div style = "width:100%;display:table">
+							<label for="email" style="display:table-cell; width:1px">Email&nbsp;&nbsp;</label>
+							<input type = "text" width = "20" id = "email" placeholder = "Email address" style="display:table-cell; width:100%" ><br>
+							<label for="phone" style="display:table-cell; width:1px">&nbsp;&nbsp;Phone&nbsp;&nbsp;</label>
+							<input type = "text" width = "20" id = "phone" placeholder = "Phone number" style="display:table-cell; width:100%" >
+						</div><br>
+
+						<div style = "width:100%;display:table">
+							<label for="address" style="display:table-cell; width:1px">Address&nbsp;&nbsp;</label>
+							<input type = "text" width = "20" id = "address" placeholder = "Street number, name..." style="display:table-cell; width:100%" ></div>
+						<div style = "width:100%;display:table">
+							<label for="country" style="display:table-cell; width:1px">Country&nbsp;&nbsp;</label>
+							<input type = "text" width = "20" id = "country" placeholder = "Country of residence" style="display:table-cell; width:100%" >
+							<label for="state" style="display:table-cell; width:1px">&nbsp;&nbsp;State&nbsp;&nbsp;</label>
+							<input type = "text" width = "20" id = "state" placeholder = "State" style="display:table-cell; width:100%" >
+							<label for="pin" style="display:table-cell; width:1px">&nbsp;&nbsp;Pincode&nbsp;&nbsp;</label>
+							<input type = "text" width = "20" id = "pin" placeholder = "Pincode" style="display:table-cell; width:100%" >
+						</div><br>
+
+						<div style = "width:100%;display:table">
+							<label for="linkedin" style="display:table-cell; width:1px">Linkedin&nbsp;&nbsp;</label>
+							<input type = "text" width = "20" id = "linkedin" placeholder = "Link to personal Linkedin page" style="display:table-cell; width:100%" >
+						</div>
+						<div style = "width:100%;display:table">
+							<label for="github" style="display:table-cell; width:1px">Github&nbsp;&nbsp;</label>
+							<input type = "text" width = "20" id = "github" placeholder = "Link to personal github page" style="display:table-cell; width:100%" >
+						</div>
+
+
+
+						<h1>Education</h1>
+						<hr>
+						<div style = "width:100%;display:table">
+							<label for="inst1" style="display:table-cell; width:1px">Institution&nbsp;1&nbsp;&nbsp;</label>
+							<select width = "20" id = "inst1" placeholder = "Institution name" style="display:table-cell; width:100%" onchange = "checkInst(this)">
+								<option>Some school</option>
+								<option value = "other">Other - enter name</option>
+							</select>
+							<input type = "text" id = "other1" style="display:table-cell; width:100%" disabled>
+						</div>
+
+						<div style = "width:100%;display:table">
+							<label for="level1" style="display:table-cell; width:1px">Level&nbsp;of&nbsp;Education&nbsp;&nbsp;</label>
+							<select width = "20" id = "level1" style="display:table-cell; width:100%" >
+								<option>Doctorate/Phd</option>
+								<option>Master</option>
+								<option>Bachelor</option>
+								<option>High School</option>
+							</select>
+							<label for="yop1" style="display:table-cell; width:1px">&nbsp;&nbsp;Graduation&nbsp;year&nbsp;&nbsp;</label>
+							<input type = "number" min = "1970" max = "2017" step = "1" width = "20" id = "yop1" value = "2017" style="display:table-cell; width:100%" >
+							<label for="marks1" style="display:table-cell; width:1px">&nbsp;&nbsp;GPA/Percentage&nbsp;&nbsp;</label>
+							<input type = "text" width = "20" id = "marks1" placeholder = "Final GPA or %" style="display:table-cell; width:100%" >
+						</div>
+						<input type = "button" id = "add_ins" value = "Add Institution" onclick = "addInst()">
+
+
+
+						<h1>Experience</h1>
+						<hr>
+						<div style = "width:100%;display:table">
+							<label for="exp1" style="display:table-cell; width:1px">Organisation&nbsp;1&nbsp;&nbsp;</label>
+							<input type = "text" width = "20" id = "exp1" placeholder = "Name of organisation" style="display:table-cell; width:100%">
+							<label for="desig1" style="display:table-cell; width:1px">&nbsp;&nbsp;Designation&nbsp;&nbsp;</label>	
+							<input type = "text" id = "desig1" placeholder="Designation held" style="display:table-cell; width:100%">
+						</div>
+						<div style = "width:100%;display:table">
+							<label for="start1" style="display:table-cell; width:1px">Start&nbsp;Date&nbsp;&nbsp;</label>
+							<input type = "date" width = "20" id = "start1"  style="display:table-cell; width:100%">
+							<label for="end1" style="display:table-cell; width:1px">&nbsp;&nbsp;End&nbsp;Date&nbsp;&nbsp;</label>	
+							<input type = "date" id = "end1" style="display:table-cell; width:100%">
+						</div>
+						<input type = "button" id = "add_exp" value = "Add Experience" onclick = "addExp()">
+
+
+						<h1>Skills/Technologies</h1>
+						<hr>
+						<div style = "width:100%;display:table">
+							<label for="skill1" style="display:table-cell; width:1px">Skill&nbsp;1&nbsp;&nbsp;</label>
+							<input type = "text" width = "20" id = "skill1" placeholder = "Java/Matlab/MS Office/..." style="display:table-cell; width:100%">
+							<label for="sk_level1" style="display:table-cell; width:1px">&nbsp;&nbsp;Level&nbsp;&nbsp;</label>	
+							<select id = "sk_level1" style="display:table-cell; width:100%">
+								<option value = "beginner">Beginner</option>
+								<option value = "intermediate" selected>Intermediate</option>
+								<option value = "advanced">Advanced</option>
+							</select>
+						</div>
+						<input type = "button" id = "add_skill" value = "Add new skill" onclick = "addSkill()">
+
+						<input type = "submit" value = "Continue" onclick = "">
+						
+					</form>
+				</div>
+				<div id = "rightpanel"><div id = "img">Picture and upload picture link goes here</div></div>
+			</div>
+	</body>
+</html>
