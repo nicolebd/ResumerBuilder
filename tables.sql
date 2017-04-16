@@ -13,15 +13,17 @@ INSERT INTO `emp_login_details` (`emp_username`, `emp_password`) VALUES ('jon sn
 CREATE TABLE `emp_personal`( `emp_id` INT(4) NOT NULL AUTO_INCREMENT,
 							 `emp_name` TINYTEXT NOT NULL,
 							 `email` TINYTEXT,
-							 `phone` TINYINT(10), 
-							 `address` MEDIUMTEXT, 
-							 `pin` SMALLINT(6), 
-							 `state` TINYTEXT,
-							 `country` TINYTEXT, 
-							 `dob` DATE, `sex` CHAR,
+							 `phone` BIGINT(10), 
+							 `address` MEDIUMTEXT,
+							 `country` TINYTEXT,
+							 `state` TINYTEXT,  
+							 `pin` bigINT(6),						 
+							 `dob` DATE,
+							 `gender` TINYTEXT,
 							 `linkedin` TINYTEXT,
-							  `github` TINYTEXT, 
-							  `dp` LONGBLOB, PRIMARY KEY (`emp_id`) ); 
+							 `github` TINYTEXT, 
+							  #`dp` LONGBLOB,
+							 PRIMARY KEY (`emp_id`) );
 
 ALTER TABLE `emp_personal` ADD CONSTRAINT `emp_id` FOREIGN KEY (`emp_id`) REFERENCES `emp_login_details`(`emp_id`) ON UPDATE CASCADE ON DELETE CASCADE; 
 CREATE TABLE `institutes`( `inst_id` INT(4) NOT NULL AUTO_INCREMENT,
