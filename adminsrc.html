@@ -1,0 +1,253 @@
+<html>
+	<head>
+		<title>Employee Home | Reature Fich</title>
+		<style type="text/css">
+			#signoutbut {
+	z-index: 999;
+	position:fixed;
+	top: 20;
+	left: 90%;
+	height: 4%;
+	width: 7%;
+	border-radius: 3px;
+	border: 1px solid white;
+	color: white;
+	font-family: verdana;
+	text-align: center;
+	padding-top: 2;
+	font-size: 15;
+}
+#header {
+	left: 0;
+    position: fixed;
+    top: 0;
+    width:100%;
+    height:23%;
+    background-color: darkslategrey;
+    border:1px solid black;
+    z-index: 998;
+}
+#banner {
+	position:relative;
+	top:0;
+	margin-top:-21;
+	height:35%;
+	z-index: 998;
+}
+h1 {
+	position: relative;
+	text-align: center;
+	color: white;
+	font-family: 'Century Gothic';
+	font-size: 60px;
+}
+
+#navbar {
+	background-color: lavender;
+	opacity:0.5;
+	margin-top:29;
+	height:50;
+	top: 0;
+	left:0;
+	z-index: 998;
+}
+#navbar p {
+	position:relative;
+	color:black;
+	font-family: arial;
+	font-size: 20;
+	text-align: center;
+	top:10;
+}
+
+
+#wrapper {
+	position: relative;
+	top: 22.4%;
+	height: 78.7%;
+	left: 1.5%;
+	height: 200%;
+	background: rgba(255,255,255,1);
+}
+
+#maincontent {
+	margin-left: 2.5%;
+	margin-top: 2.5%;
+	width: 68%;
+	float: left;
+	font-family: tahoma;
+	font-size: 18;
+}
+
+ #maincontent h1 {
+ 	padding: 10;
+ 	padding-bottom: 0;
+ 	color:darkslategrey;
+ 	text-align: left;
+ 	font-size: 30;
+ 	font-family: arial;
+ 	position: relative;
+ 	left:1%;
+ }
+
+ #maincontent p {
+ 	position: relative;
+ 	
+ 	background: rgba(255, 255, 255, 0.5);
+ 	margin-top:0;margin-bottom: 0;
+ 	padding:10;
+ 	padding-left: 25;
+ 	padding-right: 25;
+ 	width: 90%;
+ }
+ .option {
+ 	position: relative;
+ 	width: 80%;
+ 	left: 5%;
+ 	padding: 14px 20px;
+ 	border: 4px solid darkslategrey;
+ 	border-radius: 10px;
+ 	margin: 10px 0;
+ 	outline:none;
+ 	font-family: arial;
+ 	font-size: 20;
+ 	text-align: center;
+}
+
+.option:hover {
+	background-color: lavender;
+	color: darkslategrey;
+}
+
+#rightpanel {
+	float:right;
+	margin-top: 4%;
+	height: 40%;
+	width: 28%;
+	font-family: tahoma;
+	font-size: 18;
+	background-color: white;
+	border-left: 1px solid lightgrey;
+}
+
+#img {
+	position: relative;
+	width: 79%;
+	height: 40%;
+	border:1px solid lightgrey;
+	left: 5%;
+	top:5%;
+	padding: 5%;
+}
+
+.formdetails input, select {
+ 	width: 90%;
+ 	padding: 14px 20px;
+ 	border: 1px solid lightgrey;
+ 	border-radius: 10px;
+ 	margin: 10px 0;
+ 	outline:none;
+ 	font-family: arial;
+ 	font-size: 18;
+ }
+
+.formdetails input:focus, select:focus {
+    border: 1px solid grey;
+}
+
+.formdetails input[type=submit] {
+	background-color: coral;
+	color:white;
+}
+		</style>
+	<script type="text/javascript">
+		var skill_num = 1;
+	function addSkill(){
+			skill_num++;
+
+			var skill = document.createElement("input");
+			var skill_label = document.createElement("Label");
+			skill_label.innerHTML = "Skill&nbsp;" + skill_num + "&nbsp;&nbsp;";
+
+			skill.setAttribute("id", "skill" + skill_num);
+			skill.setAttribute("type", "text")
+			skill.setAttribute("width", "20");
+			skill.setAttribute("style", "display:table-cell; width:100%");
+			skill.setAttribute("placeholder", "Java/Matlab/MS Office/...")
+			
+			skill_label.setAttribute("for", "skill" + skill_num);
+			skill_label.setAttribute("style", "display:table-cell; width:1px");
+
+			var sk_level = document.createElement("select");
+			var sk_level_label = document.createElement("Label");
+			sk_level_label.innerHTML = "&nbsp;&nbspSkill&nbspLevel&nbsp;&nbsp;";
+			sk_level.innerHTML = "<option value = 'beginner'>Beginner</option><option value = 'intermediate' selected>Intermediate</option><option value = 'advanced'>Advanced</option>";
+
+			sk_level.setAttribute("id", "sk_level" + skill_num);
+			sk_level.setAttribute("width", "20");
+			sk_level.setAttribute("style", "display:table-cell; width:100%");
+			
+			sk_level_label.setAttribute("for", "sk_level" + skill_num);
+			sk_level_label.setAttribute("style", "display:table-cell; width:1px");
+
+			var div1 = document.createElement("div");
+			div1.setAttribute("style", "width:100%;display:table");
+			div1.appendChild(skill_label);
+			div1.appendChild(skill);
+			div1.appendChild(sk_level_label);
+			div1.appendChild(sk_level);
+
+			var container = document.getElementById("details");
+			var button = document.getElementById("add_skill");
+			container.insertBefore(document.createElement("br"), button);
+			container.insertBefore(div1, button);
+	}
+	</script>
+	</head>
+	<body>
+			<div id ="signoutbut"><a href = "login.html" style = "color:inherit;text-decoration: none;">Sign out</a></div>
+
+			<div id = "header">
+				<div id = "banner">
+					<h1>R E A T U R E . F I C H</h1>	
+				</div>
+				<div id = "navbar"><p>Navbar links go here</p></div>
+			</div>
+
+			<div id = "wrapper">
+				<div id = "maincontent">
+					<a href = "emphome.html">&lt;--Back to homepage</a>
+					<h1>Search for an employee </h1>
+					<hr>
+					
+					<br>
+					<form class = "formdetails" align = "center" name = "fname" id = "details">
+						
+						<div style = "width:100%;display:table">
+							<label for="skill1" style="display:table-cell; width:1px">Skill&nbsp;1&nbsp;&nbsp;</label>
+							<input type = "text" width = "20" id = "skill1" placeholder = "Java/Matlab/MS Office/..." style="display:table-cell; width:100%">
+							<label for="sk_level1" style="display:table-cell; width:1px">&nbsp;&nbsp;Skill&nbsp;Level&nbsp;&nbsp;</label>	
+							<select id = "sk_level1" style="display:table-cell; width:100%">
+								<option value = "beginner">Beginner</option>
+								<option value = "intermediate" selected>Intermediate</option>
+								<option value = "advanced">Advanced</option>
+							</select>
+						</div>
+						<input type = "button" id = "add_skill" value = "Add more skills to search" onclick = "addSkill()">
+
+						
+						<input type = "submit" value = "Search employee database" onclick = "empGen()">
+						
+						
+						<h1>Search results</h1>
+						<div style = "width:100%;display:table">
+							<h4 style="display:table-cell; width:50%">Employee&nbsp;Name&nbsp;&nbsp;</h4>
+							<h4 style="display:table-cell; width:50%">Link to resume</h4>
+						</div>
+						
+					</form>
+				</div>
+				<div id = "rightpanel"><div id = "img">Picture and upload picture link goes here</div></div>
+			</div>
+	</body>
+</html>
