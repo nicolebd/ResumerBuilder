@@ -1,0 +1,224 @@
+<html>
+	<head>
+		<title>Employee Home | Reature Fich</title>
+		<style type="text/css">
+			#signoutbut {
+	z-index: 999;
+	position:fixed;
+	top: 20;
+	left: 90%;
+	height: 4%;
+	width: 7%;
+	border-radius: 3px;
+	border: 1px solid white;
+	color: white;
+	font-family: verdana;
+	text-align: center;
+	padding-top: 2;
+	font-size: 15;
+}
+#header {
+	left: 0;
+    position: fixed;
+    top: 0;
+    width:100%;
+    height:25%;
+    background-color: darkslategrey;
+    border:1px solid black;
+    z-index: 998;
+}
+#banner {
+	position:relative;
+	top:0;
+	margin-top:-21;
+	height:35%;
+	z-index: 998;
+}
+h1 {
+	position: relative;
+	text-align: center;
+	color: white;
+	font-family: 'Century Gothic';
+	font-size: 60px;
+}
+
+#navbar {
+	background-color: lavender;
+	opacity:0.5;
+	margin-top:29;
+	height:50;
+	top: 0;
+	left:0;
+	z-index: 998;
+	overflow: hidden;
+
+}
+#navbar a {
+	float: left;
+	display:block;
+	color:black;
+	font-family: arial;
+	font-size: 20;
+	text-align: center;
+	padding:14px 16px;
+	text-decoration: none;
+
+}
+#navbar a:hover {
+	background-color: darkslategrey;
+	color: white;
+}
+#navbar a.active {
+	background-color: darkslategrey;
+	color: white;
+}
+
+
+
+#wrapper {
+	position: relative;
+	top: 22.4%;
+	height: 78.7%;
+	left: 1.5%;
+	height: 200%;
+	background: rgba(255,255,255,1);
+}
+
+#maincontent {
+	margin-left: 2.5%;
+	margin-top: 2.5%;
+	width: 68%;
+	float: left;
+	font-family: tahoma;
+	font-size: 18;
+}
+
+ #maincontent h1 {
+ 	padding: 10;
+ 	padding-bottom: 0;
+ 	color:darkslategrey;
+ 	text-align: left;
+ 	font-size: 30;
+ 	font-family: arial;
+ 	position: relative;
+ 	left:1%;
+ }
+
+ #maincontent p {
+ 	position: relative;
+ 	
+ 	background: rgba(255, 255, 255, 0.5);
+ 	margin-top:0;margin-bottom: 0;
+ 	padding:10;
+ 	padding-left: 25;
+ 	padding-right: 25;
+ 	width: 90%;
+ }
+ 
+
+#rightpanel {
+	float:right;
+	margin-top: 4%;
+	height: 40%;
+	width: 28%;
+	font-family: tahoma;
+	font-size: 18;
+	background-color: white;
+	border-left: 1px solid lightgrey;
+}
+
+#img {
+	position: relative;
+	width: 79%;
+	height: 40%;
+	border:1px solid lightgrey;
+	left: 5%;
+	top:5%;
+	padding: 5%;
+}
+
+.formdetails input, select {
+ 	width: 90%;
+ 	padding: 14px 20px;
+ 	border: 1px solid lightgrey;
+ 	border-radius: 10px;
+ 	margin: 10px 0;
+ 	outline:none;
+ 	font-family: arial;
+ 	font-size: 18;
+ }
+
+.formdetails input:focus, select:focus {
+    border: 1px solid grey;
+}
+
+.formdetails input[type=submit] {
+	background-color: coral;
+	color:white;
+}
+		</style></head>
+
+	<body>
+			<div id ="signoutbut"><a href = "/signout" style = "color:inherit;text-decoration: none;">Sign out</a></div>
+
+			<div id = "header">
+				<div id = "banner">
+					<h1>R E A T U R E . F I C H</h1>	
+				</div>
+				<div id= "navbar">
+					<a href="/home">Home</a>
+					<a href="#" class="active">Personal</a>
+					<a href="/educational">Education</a>
+					<a href="/experience">Experience</a>
+					<a href="/skill">Skills</a>
+				</div>
+			</div>
+
+			<div id = "wrapper">
+				<div id = "maincontent">
+					<br>
+					<form class = "formdetails" align = "center" name = "fname" id = "details" action="/personal_details" method="post">
+						<div style = "width:100%;display:table">
+							<label for="emp_name" style="display:table-cell; width:1px">Name&nbsp;&nbsp;</label>
+							<input type = "text" width = "20" name="emp_name" id = "emp_name" placeholder = "Full name" style="display:table-cell; width:100%" >
+						</div><br>
+						<div style = "width:100%;display:table">
+							<label for="dob" style="display:table-cell; width:1px">DOB&nbsp;&nbsp;</label>
+							<input type = "date" width = "10" name="dob" id = "dob" placeholder = "Date of birth" style="display:table-cell; width:100%" ><br>
+							<label for="sex" style="display:table-cell; width:1px">&nbsp;&nbsp;Gender&nbsp;&nbsp;</label>
+							<label for="rad" style="display: table-cell;align-content: left"><input type = "radio" name = "gender" value="female"/>Female</label>
+							<label for="rad" style="display: table-cell;align-content: left"><input type = "radio" name = "gender" value="male">Male</label>
+							<label for="rad" style="display: table-cell;align-content: left"><input type = "radio" name = "gender" value="others">Others</label>
+						</div>
+						<div style = "width:100%;display:table">
+							<label for="email" style="display:table-cell; width:1px">Email&nbsp;&nbsp;</label>
+							<input type = "text" width = "20" name="email" id = "email" placeholder = "Email address" style="display:table-cell; width:100%" ><br>
+							<label for="phone" style="display:table-cell; width:1px">&nbsp;&nbsp;Phone&nbsp;&nbsp;</label>
+							<input type = "text" width = "20" name="phone" id = "phone" placeholder = "Phone number" style="display:table-cell; width:100%" >
+						</div><br>
+
+						<div style = "width:100%;display:table">
+							<label for="address" style="display:table-cell; width:1px">Address&nbsp;&nbsp;</label>
+							<input type = "text" width = "20" name="address" id = "address" placeholder = "Street number, name..." style="display:table-cell; width:100%" ></div>
+						<div style = "width:100%;display:table">
+							<label for="country" style="display:table-cell; width:1px">Country&nbsp;&nbsp;</label>
+							<input type = "text" width = "20" name="country" id = "country" placeholder = "Country of residence" style="display:table-cell; width:100%" >
+							<label for="state" style="display:table-cell; width:1px">&nbsp;&nbsp;State&nbsp;&nbsp;</label>
+							<input type = "text" width = "20" name="state" id = "state" placeholder = "State" style="display:table-cell; width:100%" >
+							<label for="pin" style="display:table-cell; width:1px">&nbsp;&nbsp;Pincode&nbsp;&nbsp;</label>
+							<input type = "text" width = "20" name="pin" id = "pin" placeholder = "Pincode" style="display:table-cell; width:100%" >
+						</div><br>
+
+						<div style = "width:100%;display:table">
+							<label for="linkedin" style="display:table-cell; width:1px">Linkedin&nbsp;&nbsp;</label>
+							<input type = "text" width = "20" name="linkedin" id = "linkedin" placeholder = "Link to personal Linkedin page" style="display:table-cell; width:100%" >
+						</div>
+						<div style = "width:100%;display:table">
+							<label for="github" style="display:table-cell; width:1px">Github&nbsp;&nbsp;</label>
+							<input type = "text" width = "20" name="github" id = "github" placeholder = "Link to personal github page" style="display:table-cell; width:100%" >
+						</div>
+						<input type = "submit" value = "Save Personal Details" onclick = "">
+						</form>
+						</div><div id = "rightpanel"><div id = "img">Picture and upload picture link goes here</div></div>
+						</div></body></html>
+
