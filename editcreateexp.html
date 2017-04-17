@@ -1,0 +1,294 @@
+<html>
+	<head>
+		<title>Employee Home | Reature Fich</title>
+		<style type="text/css">
+			#signoutbut {
+	z-index: 999;
+	position:fixed;
+	top: 20;
+	left: 90%;
+	height: 4%;
+	width: 7%;
+	border-radius: 3px;
+	border: 1px solid white;
+	color: white;
+	font-family: verdana;
+	text-align: center;
+	padding-top: 2;
+	font-size: 15;
+}
+#header {
+	left: 0;
+    position: fixed;
+    top: 0;
+    width:100%;
+    height:25%;
+    background-color: darkslategrey;
+    border:1px solid black;
+    z-index: 998;
+}
+#banner {
+	position:relative;
+	top:0;
+	margin-top:-21;
+	height:35%;
+	z-index: 998;
+}
+h1 {
+	position: relative;
+	text-align: center;
+	color: white;
+	font-family: 'Century Gothic';
+	font-size: 60px;
+}
+
+#navbar {
+	background-color: lavender;
+	opacity:0.5;
+	margin-top:29;
+	height:50;
+	top: 0;
+	left:0;
+	z-index: 998;
+	overflow: hidden;
+
+}
+#navbar a {
+	float: left;
+	display:block;
+	color:black;
+	font-family: arial;
+	font-size: 20;
+	text-align: center;
+	padding:14px 16px;
+	text-decoration: none;
+
+}
+#navbar a:hover {
+	background-color: darkslategrey;
+	color: white;
+}
+#navbar a.active {
+	background-color: darkslategrey;
+	color: white;
+}
+
+
+
+#wrapper {
+	position: relative;
+	top: 22.4%;
+	height: 78.7%;
+	left: 1.5%;
+	height: 200%;
+	background: rgba(255,255,255,1);
+}
+
+#maincontent {
+	margin-left: 2.5%;
+	margin-top: 2.5%;
+	width: 68%;
+	float: left;
+	font-family: tahoma;
+	font-size: 18;
+}
+
+ #maincontent h1 {
+ 	padding: 10;
+ 	padding-bottom: 0;
+ 	color:darkslategrey;
+ 	text-align: left;
+ 	font-size: 30;
+ 	font-family: arial;
+ 	position: relative;
+ 	left:1%;
+ }
+
+ #maincontent p {
+ 	position: relative;
+ 	
+ 	background: rgba(255, 255, 255, 0.5);
+ 	margin-top:0;margin-bottom: 0;
+ 	padding:10;
+ 	padding-left: 25;
+ 	padding-right: 25;
+ 	width: 90%;
+ }
+ 
+
+#rightpanel {
+	float:right;
+	margin-top: 4%;
+	height: 40%;
+	width: 28%;
+	font-family: tahoma;
+	font-size: 18;
+	background-color: white;
+	border-left: 1px solid lightgrey;
+}
+
+#img {
+	position: relative;
+	width: 79%;
+	height: 40%;
+	border:1px solid lightgrey;
+	left: 5%;
+	top:5%;
+	padding: 5%;
+}
+
+.formdetails input, select {
+ 	width: 90%;
+ 	padding: 14px 20px;
+ 	border: 1px solid lightgrey;
+ 	border-radius: 10px;
+ 	margin: 10px 0;
+ 	outline:none;
+ 	font-family: arial;
+ 	font-size: 18;
+ }
+
+.formdetails input:focus, select:focus {
+    border: 1px solid grey;
+}
+
+.formdetails input[type=submit] {
+	background-color: coral;
+	color:white;
+}
+		</style>
+		<script type="text/javascript">
+		var ins_num = 1;
+		var exp_num = 1;
+		var skill_num = 1;
+		function checkInst(ele) {
+			var id = ele.id;
+			var num = id.substring(4);
+			other = document.getElementById("other"+num);
+			
+			if (ele.value == "other") {
+				other.disabled = false;
+			}
+			else {
+				other.disabled = true;
+			}
+		}
+		function addExp(){
+			exp_num++;
+
+			var exp = document.createElement("input");
+			var exp_label = document.createElement("Label");
+			exp_label.innerHTML = "Organisation&nbsp;" + exp_num + "&nbsp;&nbsp;";
+
+			exp.setAttribute("id", "exp" + exp_num);
+			exp.setAttribute("width", "20");
+			exp.setAttribute("style", "display:table-cell; width:100%");
+			exp.setAttribute("placeholder", "Name of organisation")
+
+			exp_label.setAttribute("for", "inst" + exp_num);
+			exp_label.setAttribute("style", "display:table-cell; width:1px");
+
+			var desig = document.createElement("input");
+			var desig_label = document.createElement("label");
+			desig_label.innerHTML = "&nbsp;&nbsp;Designation&nbsp;&nbsp;";
+			desig.setAttribute("id", "desig" + exp_num);
+			desig.setAttribute("style", "display:table-cell; width:100%");
+			desig.setAttribute("placeholder", "Designation held")
+
+			desig_label.setAttribute("for", "desig" + exp_num);
+			desig_label.setAttribute("style", "display:table-cell; width:1px");
+			
+			var div1 = document.createElement("div");
+			div1.setAttribute("style", "width:100%;display:table");
+			div1.appendChild(exp_label);
+			div1.appendChild(exp);
+			div1.appendChild(desig_label);
+			div1.appendChild(desig);
+
+			var start = document.createElement("input");
+			var start_label = document.createElement("Label");
+			start_label.innerHTML = "Start&nbsp;Date&nbsp;&nbsp;";     
+
+			start.setAttribute("type", "date");
+			start.setAttribute("id", "start" + exp_num);
+			start.setAttribute("width", "20");
+			start.setAttribute("style", "display:table-cell; width:100%");
+
+			start_label.setAttribute("for", "start" + exp_num);
+			start_label.setAttribute("style", "display:table-cell; width:1px");
+
+			var end = document.createElement("input");
+			var end_label = document.createElement("Label");
+			end_label.innerHTML = "&nbsp;&nbsp;End&nbsp;Date&nbsp;&nbsp;";     
+
+			end.setAttribute("type", "date");
+			end.setAttribute("id", "end" + exp_num);
+			end.setAttribute("width", "20");
+			end.setAttribute("style", "display:table-cell; width:100%");
+
+			end_label.setAttribute("for", "end" + exp_num);
+			end_label.setAttribute("style", "display:table-cell; width:1px");
+
+
+			var div2 = document.createElement("div");
+			div2.setAttribute("style", "width:100%;display:table");
+			div2.appendChild(start_label);
+			div2.appendChild(start);
+			div2.appendChild(end_label);
+			div2.appendChild(end);
+
+			var container = document.getElementById("details");
+			var button = document.getElementById("add_exp");
+			container.insertBefore(document.createElement("br"), button);
+			container.insertBefore(div1, button);
+			container.insertBefore(div2, button);
+	}
+	</script>
+	</head>
+	<body>
+			<div id ="signoutbut"><a href = "/signout" style = "color:inherit;text-decoration: none;">Sign out</a></div>
+
+			<div id = "header">
+				<div id = "banner">
+					<h1>R E A T U R E . F I C H</h1>	
+				</div>
+				<div id= "navbar">
+					<a href="/home">Home</a>
+					<a href="/personal" >Personal</a>
+					<a href="/educational" >Education</a>
+					<a href="#" class="active">Experience</a>
+					<a href="/skill">Skills</a>
+				</div>
+			</div>
+
+			<div id = "wrapper">
+				<div id = "maincontent">
+					
+					<br>
+					<form class = "formdetails" align = "center" name = "fname" id = "details" action="/exp_details" method="post">
+					<h1>Experience</h1>
+						<hr>
+						<div style = "width:100%;display:table">
+							<label for="exp1" style="display:table-cell; width:1px">Organisation&nbsp;1&nbsp;&nbsp;</label>
+							<input type = "text" width = "20" id = "exp1" placeholder = "Name of organisation" style="display:table-cell; width:100%">
+							<label for="desig1" style="display:table-cell; width:1px">&nbsp;&nbsp;Designation&nbsp;&nbsp;</label>	
+							<input type = "text" id = "desig1" placeholder="Designation held" style="display:table-cell; width:100%">
+						</div>
+						<div style = "width:100%;display:table">
+							<label for="start1" style="display:table-cell; width:1px">Start&nbsp;Date&nbsp;&nbsp;</label>
+							<input type = "date" width = "20" id = "start1"  style="display:table-cell; width:100%">
+							<label for="end1" style="display:table-cell; width:1px">&nbsp;&nbsp;End&nbsp;Date&nbsp;&nbsp;</label>	
+							<input type = "date" id = "end1" style="display:table-cell; width:100%">
+						</div>
+						<input type = "submit" value = "Save Experience" onclick = "">
+						<input type = "button" id = "add_exp" value = "Add Experience" onclick = "addExp()">
+
+						</form>
+				</div>
+				
+
+				<div id = "rightpanel"><div id = "img">Picture and upload picture link goes here</div></div>
+			</body>
+			</html>
+						
+						

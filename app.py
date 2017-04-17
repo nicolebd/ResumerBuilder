@@ -1,18 +1,18 @@
 from flask import Flask, render_template, json, request,redirect
-from flask.ext.mysql import MySQL
+import MySQLdb
 from werkzeug import generate_password_hash, check_password_hash
 from flask import session
 
-mysql = MySQL()
+#mysql = MySQL()
 app = Flask(__name__)
 app.secret_key = '1111'
 
 # MySQL configurations
-app.config['MYSQL_DATABASE_USER'] = 'root'
-app.config['MYSQL_DATABASE_PASSWORD'] = ''
-app.config['MYSQL_DATABASE_DB'] = 'employee'
-app.config['MYSQL_DATABASE_HOST'] = 'localhost'
-mysql.init_app(app)
+#app.config['MYSQL_DATABASE_USER'] = 'root'
+#app.config['MYSQL_DATABASE_PASSWORD'] = '1234'
+#app.config['MYSQL_DATABASE_DB'] = 'employee'
+#app.config['MYSQL_DATABASE_HOST'] = 'localhost'
+#mysql.init_app(app)
 
 @app.route('/')
 def main():
@@ -21,6 +21,23 @@ def main():
 @app.route('/login')
 def login():
     return render_template('login.html')
+
+@app.route('/personal')
+def editcreatep():
+    return render_template('editcreatepersonal.html')
+@app.route('/educational')
+def editcreatee():
+    return render_template('editcreateedu.html')
+@app.route('/experience')
+def editcreateex():
+    return render_template('editcreateexp.html')
+@app.route('/skill')
+def editcreates():
+    return render_template('editcreateskill.html')
+
+@app.route('/home')
+def emphome():
+	return render_template('emphome.html')
 	
 @app.route('/signup')
 def signup():
@@ -36,7 +53,8 @@ def registerUser():
 	_name = request.form['user']
 	_pass = request.form['pass']
 	
-	conn = mysql.connect()
+	conn = MySQLdb.connect(host="127.0.0.1",user="root",
+                  passwd="1234",db="employee",port=3306)
 	cursor = conn.cursor()
 	print "Connection successful"
 	try:
@@ -58,7 +76,7 @@ def registerUser():
 				cursor.close()
 				return redirect('/login')
 		else:
-			print 'Existing USer'
+			print 'Existing User'
 	except Exception as e:
 		print 'Error:'+str(e)
 	finally:
@@ -69,7 +87,8 @@ def validUser():
 	_user = request.form['user']
 	_pass = request.form['pass']
 	
-	conn = mysql.connect()
+	conn = MySQLdb.connect(host="127.0.0.1",user="root",
+                  passwd="1234",db="employee",port=3306)
 	cursor = conn.cursor()
 	print "Connection successful"
 	try:
@@ -87,6 +106,41 @@ def validUser():
 	finally:
 		cursor.close()
 		conn.close()
+	
+@app.route('/personal_details', methods=['POST'])
+def enter_details_personal():
+	try:
+		if session.get('user'):
+			conn = MySQLdb.connect(host="localhost",user="root",passwd="1234",db="employee",port=3306)
+			cursor = conn.cursor()
+			print "Connection successful"
+			_user = session.get('user')
+			_dob=request.form['dob']
+			_empname=request.form['emp_name']			
+			_gender=request.form['gender']
+			_email=request.form['email']
+			_phone=request.form['phone']
+			_address=request.form['address']
+			_country=request.form['country']
+			_state=request.form['state']
+			_pincode=request.form['pin']			
+			_linkedin=request.form['linkedin']
+			_github=request.form['github']
+			
+			cursor.execute("insert into emp_personal values (%s,'%s','%s',%s,'%s','%s','%s',%s,'%s','%s','%s','%s');"%(_user,_empname,_email,_phone,_address,_country,_state,_pincode,_dob,_gender,_linkedin,_github))
+			data = cursor.fetchall() 
+			if len(data) is 0:
+				conn.commit()
+				return redirect('/educational')
+			else:
+				return render_template('error.html',error = 'An error occurred!')
+		else:
+			return render_template('error.html',error = 'Unauthorized Access')
+	except Exception as e:
+		return render_template('error.html',error = str(e))
+	finally:   
+		cursor.close()
+		conn.close()    
 	
 if __name__ == "__main__":
     app.run(port=5002)
