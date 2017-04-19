@@ -281,7 +281,9 @@ h1 {
 						<div style = "width:100%;display:table">
 							<label for="inst1" style="display:table-cell; width:1px">Institution&nbsp;1&nbsp;&nbsp;</label>
 							<select width = "20" id = "inst1" placeholder = "Institution name" style="display:table-cell; width:100%" onchange = "checkInst(this)">
-								<option>Some school</option>
+								{% for i in range(len): %}
+									<option value={{data[i][0]}}>{{data[i][1]}}</option>
+								{% endfor %}
 								<option value = "other">Other - enter name</option>
 							</select>
 							<input type = "text" id = "other1" style="display:table-cell; width:100%" disabled>
