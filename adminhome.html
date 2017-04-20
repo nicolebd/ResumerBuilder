@@ -2,20 +2,9 @@
 	<head>
 		<title>Employee Home | Reature Fich</title>
 		<style type="text/css">
-			#signoutbut {
-	z-index: 999;
-	position:fixed;
-	top: 20;
-	left: 90%;
-	height: 4%;
-	width: 7%;
-	border-radius: 3px;
-	border: 1px solid white;
-	color: white;
-	font-family: verdana;
-	text-align: center;
-	padding-top: 2;
-	font-size: 15;
+			body {
+	background-color: #d3d3d3;
+	margin: none;
 }
 #header {
 	left: 0;
@@ -60,13 +49,28 @@ h1 {
 	top:10;
 }
 
+#signoutbut {
+	z-index: 999;
+	position:fixed;
+	top: 20;
+	left: 90%;
+	height: 4%;
+	width: 7%;
+	border-radius: 3px;
+	border: 1px solid white;
+	color: white;
+	font-family: verdana;
+	text-align: center;
+	padding-top: 2;
+	font-size: 15;
+}
 
 #wrapper {
 	position: relative;
 	top: 22.4%;
 	height: 78.7%;
 	left: 1.5%;
-	height: 200%;
+	width:97%;
 	background: rgba(255,255,255,1);
 }
 
@@ -121,8 +125,8 @@ h1 {
 
 #rightpanel {
 	float:right;
-	margin-top: 4%;
-	height: 40%;
+	margin-top: 2.5%;
+	height: 90%;
 	width: 28%;
 	font-family: tahoma;
 	font-size: 18;
@@ -140,27 +144,8 @@ h1 {
 	padding: 5%;
 }
 
-.formdetails input, select {
- 	width: 90%;
- 	padding: 14px 20px;
- 	border: 1px solid lightgrey;
- 	border-radius: 10px;
- 	margin: 10px 0;
- 	outline:none;
- 	font-family: arial;
- 	font-size: 18;
- }
-
-.formdetails input:focus, select:focus {
-    border: 1px solid grey;
-}
-
-.formdetails input[type=submit] {
-	background-color: coral;
-	color:white;
-}
 		</style>
-	
+		
 	</head>
 	<body>
 			<div id ="signoutbut"><a href = "/signout" style = "color:inherit;text-decoration: none;">Sign out</a></div>
@@ -169,39 +154,18 @@ h1 {
 				<div id = "banner">
 					<h1>R E A T U R E . F I C H</h1>	
 				</div>
-				<div id= "navbar">
-					<a href="/Ahome">Home</a>
-				</div>
+				<div id = "navbar"><p>Navbar links go here</p></div>
 			</div>
 
 			<div id = "wrapper">
 				<div id = "maincontent">
-					<h1>Add/remove administrators </h1>
+					<h1>Welcome </h1>
 					<hr>
 					
+					<p>This is your home page. </p><p>Here you can create a new resume that will be associated with your account or edit an existing one. You can also add a photo to your account and modify account information such as your email address and password.</p>
 					<br>
-					
-						
-					<form class = "formdetails" align = "center" name = "fname" id = "details">
-						<div style = "width:100%;display:table">
-							<h4 style="display:table-cell; width:25%">Employee&nbsp;Name&nbsp;&nbsp;</h4>
-							<h4 style="display:table-cell; width:25%">Email&nbsp;&nbsp;</h4>
-							<h4 style="display:table-cell; width:50%">Make&nbsp;admin?</h4>
-						</div>
-						
-						
-						<div style = "width:100%;display:table">
-							<p style="display:table-cell; width:25%">Employee&nbsp;Name&nbsp;&nbsp;</p>
-							<p style="display:table-cell; width:25%">Email&nbsp;Address&nbsp;&nbsp;</p>							
-							<input type = "radio" name = "admin" value = "yes" style="display:table-cell; width:25%">Yes
-							<input type = "radio" name = "admin" value = "no" style="display:table-cell; width:25%">No
-						</div>
-
-						
-						<input type = "submit" value = "Save" onclick = "">
-						
-						
-					</form>
+					<div class ="option"><a href = "/setAdmin" style = "color:inherit;text-decoration: none;">Set employee as Admin</a></div>
+					<div class = "option"><a href = "/searchEmp" style = "color:inherit;text-decoration: none;">Search, View and print resume</a></div>
 				</div>
 				<div id = "rightpanel"><div id = "img">Picture and upload picture link goes here</div></div>
 			</div>

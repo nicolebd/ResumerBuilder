@@ -25,12 +25,33 @@ def login():
 @app.route('/personal')
 def editcreatep():
     return render_template('editcreatepersonal.html')
+	
 @app.route('/educational')
 def editcreatee():
-    return render_template('editcreateedu.html')
+	try:
+		if session.get('user'):
+			conn = MySQLdb.connect(host="localhost",user="root",passwd="",db="employee",port=3306)
+			cursor = conn.cursor()
+			print "Connection successful"
+			cursor.execute("select * from institutes;")
+			data = cursor.fetchall() 
+			if len(data) > 0:
+				conn.commit()
+				return render_template('editcreateedu.html',data=data,len=len(data))
+			else:
+				return render_template('error.html',error = 'An error occurred!')
+		else:
+			return render_template('error.html',error = 'Unauthorized Access')
+	except Exception as e:
+		return render_template('error.html',error = str(e))
+	finally:   
+		cursor.close()
+		conn.close() 
+	
 @app.route('/experience')
 def editcreateex():
-    return render_template('editcreateexp.html')
+	return render_template('editcreateexp.html')
+ 	
 @app.route('/skill')
 def editcreates():
     return render_template('editcreateskill.html')
@@ -38,6 +59,10 @@ def editcreates():
 @app.route('/home')
 def emphome():
 	return render_template('emphome.html')
+	
+@app.route('/Ahome')
+def adminhome():
+	return render_template('adminhome.html')
 	
 @app.route('/signup')
 def signup():
@@ -48,13 +73,21 @@ def signout():
     session.pop('user',None)
     return redirect('/')
 	
+@app.route('/searchEmp')
+def searchEmp():
+	return render_template('adminsrc.html')
+	
+@app.route('/setAdmin')
+def setAdmin():
+	return render_template('setadmin.html')
+	
 @app.route('/register', methods=['POST'])
 def registerUser():
 	_name = request.form['user']
 	_pass = request.form['pass']
 	
 	conn = MySQLdb.connect(host="127.0.0.1",user="root",
-                  passwd="1234",db="employee",port=3306)
+                  passwd="",db="employee",port=3306)
 	cursor = conn.cursor()
 	print "Connection successful"
 	try:
@@ -88,7 +121,7 @@ def validUser():
 	_pass = request.form['pass']
 	
 	conn = MySQLdb.connect(host="127.0.0.1",user="root",
-                  passwd="1234",db="employee",port=3306)
+                  passwd="",db="employee",port=3306)
 	cursor = conn.cursor()
 	print "Connection successful"
 	try:
@@ -98,7 +131,10 @@ def validUser():
 		print str(data[0][1])
 		if str(data[0][2])==_pass:
 			session['user'] = data[0][0]
-			return render_template('emphome.html')
+			if data[0][3]==0:
+				return render_template('emphome.html')
+			else:
+				return render_template('adminhome.html')
 		else:
 			print 'Wrong Password'
 	except Exception as e:
@@ -111,7 +147,7 @@ def validUser():
 def enter_details_personal():
 	try:
 		if session.get('user'):
-			conn = MySQLdb.connect(host="localhost",user="root",passwd="1234",db="employee",port=3306)
+			conn = MySQLdb.connect(host="localhost",user="root",passwd="",db="employee",port=3306)
 			cursor = conn.cursor()
 			print "Connection successful"
 			_user = session.get('user')
@@ -138,6 +174,40 @@ def enter_details_personal():
 			return render_template('error.html',error = 'Unauthorized Access')
 	except Exception as e:
 		return render_template('error.html',error = str(e))
+	finally:   
+		cursor.close()
+		conn.close()    
+		
+@app.route('/edu_details', methods=['POST'])
+def edu_details():
+	try:
+		if session.get('user'):
+			conn = MySQLdb.connect(host="localhost",user="root",passwd="",db="employee",port=3306)
+			cursor = conn.cursor()
+			print "Connection successful"
+			_user = session.get('user')
+			i=1;
+
+			_inst=request.form['inst'+str(2)]
+			print 'hello'
+			print _inst
+			if _inst=='Other - enter name':
+				_othr=request.form['other'+str(i)]			
+			_level=request.form['level'+str(i)]
+			_yop=request.form['yop'+str(i)]
+			_mrks=request.form['marks'+str(i)]
+						
+			cursor.execute("insert into emp_personal values (%s,'%s','%s',%s,'%s','%s','%s',%s,'%s','%s','%s','%s');"%(_user,_empname,_email,_phone,_address,_country,_state,_pincode,_dob,_gender,_linkedin,_github))
+			data = cursor.fetchall() 
+			if len(data) is 0:
+				conn.commit()
+				return redirect('/educational')
+			else:
+				return render_template('error.html',error = 'An error occurred!')
+		else:
+			return render_template('error.html',error = 'Unauthorized Access')
+	except Exception as e:
+		return render_template('error.html',error = _inst)
 	finally:   
 		cursor.close()
 		conn.close()    
