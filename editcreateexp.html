@@ -158,24 +158,15 @@ h1 {
 }
 		</style>
 		<script type="text/javascript">
-		var ins_num = 1;
 		var exp_num = 1;
-		var skill_num = 1;
-		function checkInst(ele) {
-			var id = ele.id;
-			var num = id.substring(4);
-			other = document.getElementById("other"+num);
-			
-			if (ele.value == "other") {
-				other.disabled = false;
-			}
-			else {
-				other.disabled = true;
-			}
-		}
 		function addExp(){
 			exp_num++;
 
+			var xhr = new XMLHttpRequest();
+			xhr.open("POST", "/edu_details", true);
+			xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+			xhr.send("exp_num="+exp_num);
+			
 			var exp = document.createElement("input");
 			var exp_label = document.createElement("Label");
 			exp_label.innerHTML = "Organisation&nbsp;" + exp_num + "&nbsp;&nbsp;";

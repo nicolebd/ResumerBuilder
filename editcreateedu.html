@@ -159,8 +159,6 @@ h1 {
 		</style>
 <script type="text/javascript">
 		var ins_num = 1;
-		var exp_num = 1;
-		var skill_num = 1;
 		function checkInst(ele) {
 			var id = ele.id;
 			var num = id.substring(4);
@@ -175,7 +173,12 @@ h1 {
 		}
 		function addInst() {
 			ins_num++;
-
+			
+			var xhr = new XMLHttpRequest();
+			xhr.open("POST", "/edu_details", true);
+			xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+			xhr.send("ins_num="+ins_num);
+			
 			var inst = document.createElement("select");
 			var inst_label = document.createElement("Label");
 			inst_label.innerHTML = "Institution&nbsp;" + ins_num + "&nbsp;&nbsp;";
