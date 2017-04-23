@@ -373,7 +373,7 @@ h1 {
 	</script>
 	</head>
 	<body>
-			<div id ="signoutbut"><a href = "login.html" style = "color:inherit;text-decoration: none;">Sign out</a></div>
+			<div id ="signoutbut"><a href = "/signout" style = "color:inherit;text-decoration: none;">Sign out</a></div>
 
 			<div id = "header">
 				<div id = "banner">
@@ -384,7 +384,7 @@ h1 {
 
 			<div id = "wrapper">
 				<div id = "maincontent">
-					<a href = "emphome.html">&lt;--Back to homepage</a>
+					<button class="button"><a href = "emphome.html">Homepage</a></button>
 					<h1>Personal details </h1>
 					<hr>
 					
@@ -393,9 +393,15 @@ h1 {
 						<div style = "width:100%;display:table">
 							<label for="emp_name" style="display:table-cell; width:1px">Name&nbsp;&nbsp;</label>
 							<input type = "text" width = "20" id = "emp_name" placeholder = "Full name" style="display:table-cell; width:100%" >
-							<label for="dob" style="display:table-cell; width:1px">&nbsp;&nbsp;DOB&nbsp;&nbsp;</label>
-							<input type = "date" width = "20" id = "dob" placeholder = "Date of birth" style="display:table-cell; width:100%" >
-						</div>
+						</div><br>
+						<div style = "width:100%;display:table">
+						<label for="dob" style="display:table-cell; width:1px">DOB&nbsp;&nbsp;</label>
+						<input type = "date" width = "20" id = "dob" placeholder = "Date of birth" style="display:table-cell; width:100%" ><br>
+						<label for="sex" style="display:table-cell; width:1px">&nbsp;&nbsp;Gender&nbsp;&nbsp;</label>
+							<label for="rad" style="display: table-cell;align-content: left"><input type = "radio" name = "gender" value="female"/>Female</label>
+							<label for="rad" style="display: table-cell;align-content: left"><input type = "radio" name = "gender" value="male">Male</label>
+							<label for="rad" style="display: table-cell;align-content: left"><input type = "radio" name = "gender" value="others">Others</label>
+						</div><br>
 						<div style = "width:100%;display:table">
 							<label for="email" style="display:table-cell; width:1px">Email&nbsp;&nbsp;</label>
 							<input type = "text" width = "20" id = "email" placeholder = "Email address" style="display:table-cell; width:100%" ><br>
@@ -424,7 +430,7 @@ h1 {
 							<input type = "text" width = "20" id = "github" placeholder = "Link to personal github page" style="display:table-cell; width:100%" >
 						</div>
 
-
+						
 
 						<h1>Education</h1>
 						<hr>
