@@ -8,10 +8,10 @@ app = Flask(__name__)
 app.secret_key = '1111'
 
 # MySQL configurations
-#app.config['MYSQL_DATABASE_USER'] = 'root'
-#app.config['MYSQL_DATABASE_PASSWORD'] = '1234'
-#app.config['MYSQL_DATABASE_DB'] = 'employee'
-#app.config['MYSQL_DATABASE_HOST'] = 'localhost'
+app.config['MYSQL_DATABASE_USER'] = 'root'
+app.config['MYSQL_DATABASE_PASSWORD'] = ''
+app.config['MYSQL_DATABASE_DB'] = 'employee'
+app.config['MYSQL_DATABASE_HOST'] = 'localhost'
 #mysql.init_app(app)
 
 @app.route('/')
@@ -24,37 +24,87 @@ def login():
 
 @app.route('/personal')
 def editcreatep():
-    return render_template('editcreatepersonal.html')
+	if session.get('user'):
+		conn = MySQLdb.connect(host="localhost",user="root",passwd="",db="employee",port=3306)
+		print "Education:Connection successful"
+		try:
+			_user=session.get('user')
+			cursor = conn.cursor()
+			cursor.execute("select * from emp_personal where emp_id=%s;"%(_user))
+			data = cursor.fetchall()
+			return render_template('editcreatepersonal.html',data=data,len=len(data))
+		except Exception as e:
+			return render_template('error.html',error = str(e))
+		finally:   
+			cursor.close()
+			conn.close()
+	else:
+		return render_template('error.html',error = 'Unauthorised user')
 	
 @app.route('/educational')
 def editcreatee():
-	try:
-		if session.get('user'):
-			conn = MySQLdb.connect(host="localhost",user="root",passwd="",db="employee",port=3306)
+	if session.get('user'):
+		conn = MySQLdb.connect(host="localhost",user="root",passwd="",db="employee",port=3306)
+		print "Education:Connection successful"
+		try:
+			_user=session.get('user')
 			cursor = conn.cursor()
-			print "Connection successful"
-			cursor.execute("select * from institutes;")
-			data = cursor.fetchall() 
-			if len(data) > 0:
-				conn.commit()
-				return render_template('editcreateedu.html',data=data,len=len(data))
-			else:
-				return render_template('error.html',error = 'An error occurred!')
-		else:
-			return render_template('error.html',error = 'Unauthorized Access')
-	except Exception as e:
-		return render_template('error.html',error = str(e))
-	finally:   
-		cursor.close()
-		conn.close() 
+			cursor.execute("select * from education,institutes where education.emp_id ='%s' and education.inst_id=institutes.inst_id;"%(_user))
+			data = cursor.fetchall()
+			return render_template('editcreateedu.html',data=data,len=len(data))
+		except Exception as e:
+			return render_template('error.html',error = str(e))
+		finally:   
+			cursor.close()
+			conn.close()
+	else:
+		return render_template('error.html',error = 'Unauthorised user')
 	
 @app.route('/experience')
 def editcreateex():
-	return render_template('editcreateexp.html')
- 	
+	if session.get('user'):
+		conn = MySQLdb.connect(host="localhost",user="root",passwd="",db="employee",port=3306)
+		print "Experience:Connection successful"
+		try:
+			_user=session.get('user')
+			cursor = conn.cursor()
+			cursor.execute("select * from experience where emp_id ='%s';"%(_user))
+			data = cursor.fetchall()
+			cursor.close()
+			return render_template('editcreateexp.html',data=data,len=len(data))
+		except Exception as e:
+			return render_template('error.html',error = str(e))
+		finally:   
+			conn.close()
+	else:
+		return render_template('error.html',error = 'Unauthorised user')
+	
 @app.route('/skill')
-def editcreates():
-    return render_template('editcreateskill.html')
+def editcreatesk():
+	if session.get('user'):
+		conn = MySQLdb.connect(host="localhost",user="root",passwd="",db="employee",port=3306)
+		print "Experience:Connection successful"
+		try:
+			_user=session.get('user')
+			cursor = conn.cursor()
+			cursor.execute("select * from skill where emp_id ='%s';"%(_user))
+			data = cursor.fetchall()
+			cursor.close()
+			return render_template('editcreateskill.html',data=data,len=len(data))
+		except Exception as e:
+			return render_template('error.html',error = str(e))
+		finally:   
+			conn.close()
+	else:
+		return render_template('error.html',error = 'Unauthorised user')
+		
+@app.route('/setAdmin')
+def setAdmin():
+	return render_template('setadmin.html')
+	
+@app.route('/searchEmp')
+def searchEmp():
+	return render_template('adminsrc.html')
 
 @app.route('/home')
 def emphome():
@@ -73,23 +123,14 @@ def signout():
     session.pop('user',None)
     return redirect('/')
 	
-@app.route('/searchEmp')
-def searchEmp():
-	return render_template('adminsrc.html')
-	
-@app.route('/setAdmin')
-def setAdmin():
-	return render_template('setadmin.html')
-	
 @app.route('/register', methods=['POST'])
 def registerUser():
 	_name = request.form['user']
 	_pass = request.form['pass']
 	
-	conn = MySQLdb.connect(host="127.0.0.1",user="root",
-                  passwd="",db="employee",port=3306)
+	conn = MySQLdb.connect(host="localhost",user="root",passwd="",db="employee",port=3306)
 	cursor = conn.cursor()
-	print "Connection successful"
+	print "Register:Connection successful"
 	try:
 		cursor.execute("select max(emp_id) from emp_login_details;")
 		data = cursor.fetchall()
@@ -120,21 +161,21 @@ def validUser():
 	_user = request.form['user']
 	_pass = request.form['pass']
 	
-	conn = MySQLdb.connect(host="127.0.0.1",user="root",
-                  passwd="",db="employee",port=3306)
+	conn = MySQLdb.connect(host="localhost",user="root",passwd="",db="employee",port=3306)
 	cursor = conn.cursor()
-	print "Connection successful"
+	print "Validate:Connection successful"
 	try:
 		cursor.execute("select * from emp_login_details where emp_username='%s';"%(_user))
 		data = cursor.fetchall()
+		print data
 		x=data[0][0]
 		print str(data[0][1])
 		if str(data[0][2])==_pass:
 			session['user'] = data[0][0]
-			if data[0][3]==0:
-				return render_template('emphome.html')
+			if(data[0][3]==0):
+				return redirect('/home')
 			else:
-				return render_template('adminhome.html')
+				return redirect('/Ahome')
 		else:
 			print 'Wrong Password'
 	except Exception as e:
@@ -149,7 +190,7 @@ def enter_details_personal():
 		if session.get('user'):
 			conn = MySQLdb.connect(host="localhost",user="root",passwd="",db="employee",port=3306)
 			cursor = conn.cursor()
-			print "Connection successful"
+			print "Personal Details:Connection successful"
 			_user = session.get('user')
 			_dob=request.form['dob']
 			_empname=request.form['emp_name']			
@@ -177,40 +218,193 @@ def enter_details_personal():
 	finally:   
 		cursor.close()
 		conn.close()    
-		
+
 @app.route('/edu_details', methods=['POST'])
-def edu_details():
+def enter_details_edu():
 	try:
 		if session.get('user'):
 			conn = MySQLdb.connect(host="localhost",user="root",passwd="",db="employee",port=3306)
 			cursor = conn.cursor()
-			print "Connection successful"
+			print "Edu Details:Connection successful"
 			_user = session.get('user')
-			i=1;
-
-			_inst=request.form['inst'+str(2)]
-			print 'hello'
-			print _inst
-			if _inst=='Other - enter name':
-				_othr=request.form['other'+str(i)]			
-			_level=request.form['level'+str(i)]
-			_yop=request.form['yop'+str(i)]
-			_mrks=request.form['marks'+str(i)]
-						
-			cursor.execute("insert into emp_personal values (%s,'%s','%s',%s,'%s','%s','%s',%s,'%s','%s','%s','%s');"%(_user,_empname,_email,_phone,_address,_country,_state,_pincode,_dob,_gender,_linkedin,_github))
-			data = cursor.fetchall() 
-			if len(data) is 0:
-				conn.commit()
-				return redirect('/educational')
-			else:
-				return render_template('error.html',error = 'An error occurred!')
+			i=0
+			while request.form['inst'+str((i+1))]:
+				i=i+1
+				_inst=request.form['inst'+str(i)]
+				_level=request.form['level'+str(i)]			
+				_yop=request.form['yop'+str(i)]
+				_marks=request.form['marks'+str(i)]
+				print _user
+				print _inst
+				print _level
+				print _yop
+				print _marks
+				cursor = conn.cursor()
+				cursor.execute("select inst_id from institutes where inst_name ='%s';"%(_inst))
+				institute = cursor.fetchall()
+				cursor.close()
+				if len(institute) == 0:
+					cursor = conn.cursor()
+					cursor.execute("insert into institutes (`inst_name`) values ('%s');"%(_inst))
+					cursor.close()
+					conn.commit()
+					cursor = conn.cursor()
+					cursor.execute("select inst_id from institutes where inst_name ='%s';"%(_inst))
+					institute=	cursor.fetchall()
+					cursor.close()
+				_num=institute[0][0]
+				cursor = conn.cursor()
+				cursor.execute("insert into education values (%s,%s,'%s',%s,%s);"%(_user,_num,_level,_yop,_marks))
+				institute = cursor.fetchall()
+				cursor.close()
+				if len(institute) is 0:
+					conn.commit()
+					return redirect('/educational')
+				else:
+					return render_template('error.html',error = 'An error occurred!')
+					
 		else:
 			return render_template('error.html',error = 'Unauthorized Access')
 	except Exception as e:
-		return render_template('error.html',error = _inst)
+		return render_template('error.html',error = str(e))
 	finally:   
-		cursor.close()
-		conn.close()    
+		conn.close()
+
+@app.route('/edu_details_remove', methods=['POST'])
+def remove_details_edu():
+	_user = session.get('user')
+	_inst = request.form['inst_id']
+	_lvl = request.form['level']
+     
+	conn = MySQLdb.connect(host="localhost",user="root",passwd="",db="employee",port=3306)
+	cursor = conn.cursor()
+	print "Edu Details Rev:Connection successful"
+	try:
+			cursor.execute("delete from education where emp_id=%s and inst_id=%s and level='%s';"%(_user,_inst,_lvl))
+			data = cursor.fetchall()
+             
+			if len(data) == 0:
+				conn.commit()
+				cursor.close()
+				return redirect('/educational')
+	except Exception as e:
+		return render_template('error.html',error = e)
+	finally:
+		conn.close()
+		
+@app.route('/exp_details', methods=['POST'])
+def enter_details_exp():
+	try:
+		if session.get('user'):
+			conn = MySQLdb.connect(host="localhost",user="root",passwd="",db="employee",port=3306)
+			cursor = conn.cursor()
+			print "Exp Details:Connection successful"
+			_user = session.get('user')
+			i=0
+			while request.form['exp'+str((i+1))]:
+				i=i+1
+				_exp=request.form['exp'+str(i)]
+				_desig=request.form['desig'+str(i)]			
+				_start=request.form['start'+str(i)]
+				_end=request.form['end'+str(i)]
+				print _user
+				print _exp
+				print _desig
+				print _start
+				print _end
+				cursor = conn.cursor()
+				cursor.execute("insert into experience values (%s,'%s','%s','%s','%s');"%(_user,_desig,_exp,_start,_end))
+				data = cursor.fetchall()
+				cursor.close()
+				if len(data) is 0:
+					conn.commit()
+					return redirect('/experience')
+				else:
+					return render_template('error.html',error = 'An error occurred!')
+					
+		else:
+			return render_template('error.html',error = 'Unauthorized Access')
+	except Exception as e:
+		return render_template('error.html',error = str(e))
+	finally:   
+		conn.close()
+
+@app.route('/exp_details_remove', methods=['POST'])
+def remove_details_exp():
+	_user = session.get('user')
+	_desig = request.form['desig']
+	_exp = request.form['exp']
+     
+	conn = MySQLdb.connect(host="localhost",user="root",passwd="",db="employee",port=3306)
+	cursor = conn.cursor()
+	print "Exp Details Rev:Connection successful"
+	try:
+			cursor.execute("delete from experience where emp_id=%s and designation='%s' and organisation='%s';"%(_user,_desig,_exp))
+			data = cursor.fetchall()
+             
+			if len(data) == 0:
+				conn.commit()
+				cursor.close()
+				return redirect('/experience')
+	except Exception as e:
+		return render_template('error.html',error = e)
+	finally:
+		conn.close()
+		
+@app.route('/skill_details', methods=['POST'])
+def enter_details_skill():
+	try:
+		if session.get('user'):
+			conn = MySQLdb.connect(host="localhost",user="root",passwd="",db="employee",port=3306)
+			cursor = conn.cursor()
+			print "Skill Details:Connection successful"
+			_user = session.get('user')
+			i=0
+			while request.form['skill'+str((i+1))]:
+				i=i+1
+				_skill=request.form['skill'+str(i)]
+				_lvl=request.form['sk_level'+str(i)]			
+				print _user
+				print _skill
+				print _lvl
+				cursor = conn.cursor()
+				cursor.execute("insert into skill values (%s,'%s','%s');"%(_user,_skill,_lvl))
+				data = cursor.fetchall()
+				cursor.close()
+				if len(data) is 0:
+					conn.commit()
+					return redirect('/skill')
+				else:
+					return render_template('error.html',error = 'An error occurred!')
+					
+		else:
+			return render_template('error.html',error = 'Unauthorized Access')
+	except Exception as e:
+		return render_template('error.html',error = str(e))
+	finally:   
+		conn.close()
+
+@app.route('/skill_details_remove', methods=['POST'])
+def remove_details_skill():
+	_user = session.get('user')
+	_skill = request.form['skill']
+	_lvl = request.form['sk_level']
+     
+	conn = MySQLdb.connect(host="localhost",user="root",passwd="",db="employee",port=3306)
+	cursor = conn.cursor()
+	print "Skill Details Rev:Connection successful"
+	try:
+			cursor.execute("delete from skill where emp_id=%s and skills='%s' and level='%s';"%(_user,_skill,_lvl))
+			data = cursor.fetchall()
+             
+			if len(data) == 0:
+				conn.commit()
+				cursor.close()
+				return redirect('/skill')
+	except Exception as e:
+		return render_template('error.html',error = e)
+	finally:
+		conn.close()
 	
 if __name__ == "__main__":
     app.run(port=5002)
