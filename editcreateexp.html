@@ -265,23 +265,46 @@ h1 {
 				<div id = "maincontent">
 					
 					<br>
-					<form class = "formdetails" align = "center" name = "fname" id = "details" action="/exp_details" method="post">
+					
 					<h1>Experience</h1>
 						<hr>
+						{% for i in range(len) %}
+						<form class = "formdetails" align = "center" name = "fname" id = "details" action="/exp_details_remove" method="post">
 						<div style = "width:100%;display:table">
-							<label for="exp1" style="display:table-cell; width:1px">Organisation&nbsp;1&nbsp;&nbsp;</label>
-							<input type = "text" width = "20" id = "exp1" placeholder = "Name of organisation" style="display:table-cell; width:100%">
-							<label for="desig1" style="display:table-cell; width:1px">&nbsp;&nbsp;Designation&nbsp;&nbsp;</label>	
-							<input type = "text" id = "desig1" placeholder="Designation held" style="display:table-cell; width:100%">
+							<label for="exp1" style="display:table-cell; width:1px">Organisation&nbsp;&nbsp;</label>
+							<label for="exp1" style="display:table-cell; width:1px">{{data[i][2]}}&nbsp;</label>
+							<label for="desig1" style="display:table-cell; width:1px">&nbsp;Designation&nbsp;&nbsp;</label>	
+							<label for="desig1" style="display:table-cell; width:1px">{{data[i][1]}}&nbsp;&nbsp;</label>
 						</div>
 						<div style = "width:100%;display:table">
 							<label for="start1" style="display:table-cell; width:1px">Start&nbsp;Date&nbsp;&nbsp;</label>
-							<input type = "date" width = "20" id = "start1"  style="display:table-cell; width:100%">
+							<label for="start1" style="display:table-cell; width:1px">{{data[i][3]}}&nbsp;</label>
+							<label for="end1" style="display:table-cell; width:1px">&nbsp;End&nbsp;Date&nbsp;&nbsp;</label>	
+							<label for="end1" style="display:table-cell; width:1px">{{data[i][4]}}&nbsp;&nbsp;</label>
+						</div>
+						<div style = "width:100%;display:table">
+							<input type="hidden" name="desig" value="{{data[i][1]}}">
+							<input type="hidden" name="exp" value="{{data[i][2]}}">
+							<input type = "submit" value = "Remove Experience" onclick = "">
+						</div>
+						</form>
+						{% endfor %}
+						
+						<br>
+						<form class = "formdetails" align = "center" name = "fname" id = "details" action="/exp_details" method="post">
+						<div style = "width:100%;display:table">
+							<label for="exp1" style="display:table-cell; width:1px">Organisation&nbsp;&nbsp;</label>
+							<input type = "text" width = "20" name = "exp1" placeholder = "Name of organisation" style="display:table-cell; width:100%">
+							<label for="desig1" style="display:table-cell; width:1px">&nbsp;&nbsp;Designation&nbsp;&nbsp;</label>	
+							<input type = "text" name = "desig1" placeholder="Designation held" style="display:table-cell; width:100%">
+						</div>
+						<div style = "width:100%;display:table">
+							<label for="start1" style="display:table-cell; width:1px">Start&nbsp;Date&nbsp;&nbsp;</label>
+							<input type = "date" width = "20" name = "start1"  style="display:table-cell; width:100%">
 							<label for="end1" style="display:table-cell; width:1px">&nbsp;&nbsp;End&nbsp;Date&nbsp;&nbsp;</label>	
-							<input type = "date" id = "end1" style="display:table-cell; width:100%">
+							<input type = "date" name = "end1" style="display:table-cell; width:100%">
 						</div>
 						<input type = "submit" value = "Save Experience" onclick = "">
-						<input type = "button" id = "add_exp" value = "Add Experience" onclick = "addExp()">
 
 						</form>
 				</div>
