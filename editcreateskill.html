@@ -232,23 +232,38 @@ h1 {
 			</div>
 			<div id = "wrapper">
 				<div id = "maincontent">
-			<form class = "formdetails" align = "center" name = "fname" id = "details" action="/skill_details" method="post">
+			
 			<h1>Skills/Technologies</h1>
 						<hr>
+						{% for i in range(len) %}
+						<form class = "formdetails" align = "center" name = "fname" id = "details" action="/skill_details_remove" method="post">
 						<div style = "width:100%;display:table">
-							<label for="skill1" style="display:table-cell; width:1px">Skill&nbsp;1&nbsp;&nbsp;</label>
-							<input type = "text" width = "20" id = "skill1" placeholder = "Java/Matlab/MS Office/..." style="display:table-cell; width:100%">
+							<label for="skill1" style="display:table-cell; width:1px">Skill&nbsp;</label>
+							<label for="skill1" style="display:table-cell; width:1px">{{data[i][1]}}&nbsp;</label>
+							<label for="sk_level1" style="display:table-cell; width:1px">&nbsp;Level&nbsp;</label>	
+							<label for="sk_level1" style="display:table-cell; width:1px">{{data[i][2]}}&nbsp;</label>
+						</div>
+						<div style = "width:100%;display:table">
+							<input type="hidden" name="skill" value="{{data[i][1]}}">
+							<input type="hidden" name="sk_level" value="{{data[i][2]}}">
+							<input type = "submit" value = "Remove Skills/Tech" onclick = "">
+						</div>
+						</form>
+						{% endfor %}
+						
+						<br>
+						<form class = "formdetails" align = "center" name = "fname" id = "details" action="/skill_details" method="post">
+						<div style = "width:100%;display:table">
+							<label for="skill1" style="display:table-cell; width:1px">Skill&nbsp;&nbsp;</label>
+							<input type = "text" width = "20" name = "skill1" placeholder = "Java/Matlab/MS Office/..." style="display:table-cell; width:100%">
 							<label for="sk_level1" style="display:table-cell; width:1px">&nbsp;&nbsp;Level&nbsp;&nbsp;</label>	
-							<select id = "sk_level1" style="display:table-cell; width:100%">
-								<option value = "beginner">Beginner</option>
-								<option value = "intermediate" selected>Intermediate</option>
-								<option value = "advanced">Advanced</option>
+							<select name = "sk_level1" style="display:table-cell; width:100%">
+								<option value = "Beginner">Beginner</option>
+								<option value = "Intermediate" selected>Intermediate</option>
+								<option value = "Advanced">Advanced</option>
 							</select>
 						</div>
 						<input type = "submit" value = "Save Skills/Tech" onclick = "">
-						<input type = "button" id = "add_skill" value = "Add new skill" onclick = "addSkill()">
-
-						<input type = "button" id= "continue" value = "Continue" onclick = "">
 						
 					</form>
 				</div>

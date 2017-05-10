@@ -22,7 +22,7 @@
     position: fixed;
     top: 0;
     width:100%;
-    height:23%;
+    height:25%;
     background-color: darkslategrey;
     border:1px solid black;
     z-index: 998;
@@ -50,15 +50,29 @@ h1 {
 	top: 0;
 	left:0;
 	z-index: 998;
+	overflow: hidden;
+
 }
-#navbar p {
-	position:relative;
+#navbar a {
+	float: left;
+	display:block;
 	color:black;
 	font-family: arial;
 	font-size: 20;
 	text-align: center;
-	top:10;
+	padding:14px 16px;
+	text-decoration: none;
+
 }
+#navbar a:hover {
+	background-color: darkslategrey;
+	color: white;
+}
+#navbar a.active {
+	background-color: darkslategrey;
+	color: white;
+}
+
 
 
 #wrapper {
@@ -100,24 +114,7 @@ h1 {
  	padding-right: 25;
  	width: 90%;
  }
- .option {
- 	position: relative;
- 	width: 80%;
- 	left: 5%;
- 	padding: 14px 20px;
- 	border: 4px solid darkslategrey;
- 	border-radius: 10px;
- 	margin: 10px 0;
- 	outline:none;
- 	font-family: arial;
- 	font-size: 20;
- 	text-align: center;
-}
-
-.option:hover {
-	background-color: lavender;
-	color: darkslategrey;
-}
+ 
 
 #rightpanel {
 	float:right;
@@ -169,7 +166,7 @@ h1 {
 			var skill_label = document.createElement("Label");
 			skill_label.innerHTML = "Skill&nbsp;" + skill_num + "&nbsp;&nbsp;";
 
-			skill.setAttribute("id", "skill" + skill_num);
+			skill.setAttribute("name", "skill" + skill_num);
 			skill.setAttribute("type", "text")
 			skill.setAttribute("width", "20");
 			skill.setAttribute("style", "display:table-cell; width:100%");
@@ -183,7 +180,7 @@ h1 {
 			sk_level_label.innerHTML = "&nbsp;&nbspSkill&nbspLevel&nbsp;&nbsp;";
 			sk_level.innerHTML = "<option value = 'beginner'>Beginner</option><option value = 'intermediate' selected>Intermediate</option><option value = 'advanced'>Advanced</option>";
 
-			sk_level.setAttribute("id", "sk_level" + skill_num);
+			sk_level.setAttribute("name", "sk_level" + skill_num);
 			sk_level.setAttribute("width", "20");
 			sk_level.setAttribute("style", "display:table-cell; width:100%");
 			
@@ -222,13 +219,13 @@ h1 {
 					<hr>
 					
 					<br>
-					<form class = "formdetails" align = "center" name = "fname" id = "details">
+					<form class = "formdetails" align = "center" name = "fname" id = "details" action="/emp_seach" method="post">
 						
 						<div style = "width:100%;display:table">
 							<label for="skill1" style="display:table-cell; width:1px">Skill&nbsp;1&nbsp;&nbsp;</label>
-							<input type = "text" width = "20" id = "skill1" placeholder = "Java/Matlab/MS Office/..." style="display:table-cell; width:100%">
+							<input type = "text" width = "20" name="skill1" placeholder = "Java/Matlab/MS Office/..." style="display:table-cell; width:100%">
 							<label for="sk_level1" style="display:table-cell; width:1px">&nbsp;&nbsp;Skill&nbsp;Level&nbsp;&nbsp;</label>	
-							<select id = "sk_level1" style="display:table-cell; width:100%">
+							<select name="sk_level1" style="display:table-cell; width:100%">
 								<option value = "beginner">Beginner</option>
 								<option value = "intermediate" selected>Intermediate</option>
 								<option value = "advanced">Advanced</option>
@@ -238,15 +235,24 @@ h1 {
 
 						
 						<input type = "submit" value = "Search employee database" onclick = "empGen()">
+					</form>
 						
-						
-						<h1>Search results</h1>
+						<h1>{{skill}}</h1>
 						<div style = "width:100%;display:table">
 							<h4 style="display:table-cell; width:50%">Employee&nbsp;Name&nbsp;&nbsp;</h4>
 							<h4 style="display:table-cell; width:50%">Link to resume</h4>
 						</div>
+						{% for i in range(len) %}
+						<form class = "formdetails" align = "center" name = "fname" id = "details" action="/create_resume" method="post">
+						<div style = "width:100%;display:table">
+							<h4 style="display:table-cell; width:50%">{{data[i][1]}}&nbsp;&nbsp;</h4>
+							<input type="hidden" name="empid" value="{{data[i][0]}}">
+							<input type = "submit" value = "Link to resume" onclick = "" style="display:table-cell; width:50%">
+						</div>
+						</form>
+						{% endfor %}
 						
-					</form>
+					
 				</div>
 				<div id = "rightpanel"><div id = "img">Picture and upload picture link goes here</div></div>
 			</div>

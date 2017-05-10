@@ -179,18 +179,13 @@ h1 {
 			var inst = document.createElement("select");
 			var inst_label = document.createElement("Label");
 			inst_label.innerHTML = "Institution&nbsp;" + ins_num + "&nbsp;&nbsp;";
-			inst.innerHTML = "<option>Some school</option><option value = 'other'>Other - enter name</option>";
+			inst.innerHTML = "";
 			var otherins = document.createElement("input")
 
-			inst.setAttribute("id", "inst" + ins_num);
-			inst.setAttribute("width", "20");
-			inst.setAttribute("style", "display:table-cell; width:100%");
-			inst.setAttribute("onchange", "checkInst(this)");
 
-			otherins.setAttribute("id", "other" + ins_num);
+			otherins.setAttribute("name", "inst" + ins_num);
 			otherins.setAttribute("type", "text");
 			otherins.setAttribute("style", "display:table-cell; width:100%");
-			otherins.setAttribute("disabled", true);
 
 			inst_label.setAttribute("for", "inst" + ins_num);
 			inst_label.setAttribute("style", "display:table-cell; width:1px");
@@ -198,14 +193,13 @@ h1 {
 			var div1 = document.createElement("div");
 			div1.setAttribute("style", "width:100%;display:table");
 			div1.appendChild(inst_label);
-			div1.appendChild(inst);
 			div1.appendChild(otherins);
 
 			var edu_level = document.createElement("select");
 			var edu_level_label = document.createElement("label");
 			edu_level_label.innerHTML = "Level&nbsp;of&nbsp;Education&nbsp;&nbsp;";
 			edu_level.innerHTML = "<option>Doctorate/Phd</option><option>Master</option><option>Bachelor</option><option>High&nbsp;School</option>";
-			edu_level.setAttribute("id", "level" + ins_num);
+			edu_level.setAttribute("name", "level" + ins_num);
 			edu_level.setAttribute("style", "display:table-cell; width:100%");
 
 			edu_level_label.setAttribute("for", "level" + ins_num);
@@ -218,7 +212,7 @@ h1 {
 			gradyear.setAttribute("type", "number");
 			gradyear.setAttribute("min", "1970");
 			gradyear.setAttribute("max", "2017");
-			gradyear.setAttribute("id", "yop" + ins_num);
+			gradyear.setAttribute("name", "yop" + ins_num);
 			gradyear.setAttribute("width", "20");
 			gradyear.setAttribute("value", "2017")
 			gradyear.setAttribute("style", "display:table-cell; width:100%");
@@ -231,7 +225,7 @@ h1 {
 			marks_label.innerHTML = "&nbsp;&nbsp;GPA/Percentage&nbsp;&nbsp;";     
 
 			marks.setAttribute("type", "text");
-			marks.setAttribute("id", "marks" + ins_num);
+			marks.setAttribute("name", "marks" + ins_num);
 			marks.setAttribute("width", "20");
 			marks.setAttribute("placeholder", "Final GPA or %")
 			marks.setAttribute("style", "display:table-cell; width:100%");
@@ -275,35 +269,52 @@ h1 {
 			</div>
 			<div id = "wrapper">
 				<div id = "maincontent">
-			<form class = "formdetails" align = "center" name = "fname" id = "details" action="/edu_details" method="post">
+
 						<h1>Education</h1>
 						<hr>
+						{% for i in range(len) %}
+						<form class = "formdetails" align = "center" name = "fname" id = "details" action="/edu_details_remove" method="post">
 						<div style = "width:100%;display:table">
-							<label for="inst1" style="display:table-cell; width:1px">Institution&nbsp;1&nbsp;&nbsp;</label>
-							<select width = "20" id = "inst1" placeholder = "Institution name" style="display:table-cell; width:100%" onchange = "checkInst(this)">
-								{% for i in range(len): %}
-									<option value={{data[i][0]}}>{{data[i][1]}}</option>
-								{% endfor %}
-								<option value = "other">Other - enter name</option>
-							</select>
-							<input type = "text" id = "other1" style="display:table-cell; width:100%" disabled>
+							<label for="inst1" style="display:table-cell; width:1px">Institution&nbsp;&nbsp;&nbsp;</label>
+							<label for="name1" style="display:table-cell; width:1px">{{data[i][6]}}&nbsp;&nbsp;</label>
+						</div>
+						<div style = "width:100%;display:table">
+							<label for="inst1" style="display:table-cell; width:1px">Level&nbsp;of&nbsp;Education&nbsp;&nbsp;</label>
+							<label for="inst1" style="display:table-cell; width:1px">{{data[i][2]}}&nbsp;&nbsp;</label>
+							<label for="inst1" style="display:table-cell; width:1px">&nbsp;&nbsp;Graduation&nbsp;year&nbsp;&nbsp;</label>
+							<label for="inst1" style="display:table-cell; width:1px">{{data[i][3]}}&nbsp;&nbsp;</label>
+							<label for="inst1" style="display:table-cell; width:1px">&nbsp;&nbsp;GPA/Percentage&nbsp;&nbsp;</label>
+							<label for="inst1" style="display:table-cell; width:1px">{{data[i][4]}}&nbsp;&nbsp;</label>
+						</div>
+						<div style = "width:100%;display:table">
+							<input type="hidden" name="inst_id" value="{{data[i][1]}}">
+							<input type="hidden" name="level" value="{{data[i][2]}}">
+							<input type = "submit" value = "Remove Education" onclick = "">
+						</div>
+						</form>
+						{% endfor %}
+						
+						<br>
+				<form class = "formdetails" align = "center" name = "fname" id = "details" action="/edu_details" method="post">
+						<div style = "width:100%;display:table">
+							<label for="inst1" style="display:table-cell; width:1px">Institution&nbsp;&nbsp;&nbsp;</label>
+							<input type = "text" name = "inst1" style="display:table-cell; width:100%">
 						</div>
 
 						<div style = "width:100%;display:table">
 							<label for="level1" style="display:table-cell; width:1px">Level&nbsp;of&nbsp;Education&nbsp;&nbsp;</label>
-							<select width = "20" id = "level1" style="display:table-cell; width:100%" >
+							<select width = "20" name = "level1" style="display:table-cell; width:100%" >
 								<option>Doctorate/Phd</option>
 								<option>Master</option>
 								<option>Bachelor</option>
-								<option>High School</option>
+								<option>High-School</option>
 							</select>
 							<label for="yop1" style="display:table-cell; width:1px">&nbsp;&nbsp;Graduation&nbsp;year&nbsp;&nbsp;</label>
-							<input type = "number" min = "1970" max = "2017" step = "1" width = "20" id = "yop1" value = "2017" style="display:table-cell; width:100%" >
+							<input type = "number" min = "1970" max = "2017" step = "1" width = "20" name = "yop1" value = "2017" style="display:table-cell; width:100%" >
 							<label for="marks1" style="display:table-cell; width:1px">&nbsp;&nbsp;GPA/Percentage&nbsp;&nbsp;</label>
-							<input type = "text" width = "20" id = "marks1" placeholder = "Final GPA or %" style="display:table-cell; width:100%" >
+							<input type = "text" width = "20" name = "marks1" placeholder = "Final GPA or %" style="display:table-cell; width:100%" >
 						</div>
 						<input type = "submit" value = "Save Education" onclick = "">
-						<input type = "button" id = "add_ins" value = "Add Institution" onclick = "addInst()">
 						
 				</form>
 				</div>
