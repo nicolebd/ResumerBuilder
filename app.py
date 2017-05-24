@@ -244,7 +244,49 @@ def enter_details_personal():
 		return render_template('error.html',error = str(e))
 	finally:   
 		cursor.close()
-		conn.close()    
+		conn.close()
+
+@app.route('/updt_personal_details', methods=['POST'])
+def updt_details_personal():
+	try:
+		if session.get('user'):
+			conn = MySQLdb.connect(host="localhost",user="root",passwd="1234",db="employee",port=3306)
+			print "Personal Details Updt:Connection successful"
+			_user = session.get('user')
+			_dob=request.form['dob']
+			_empname=request.form['emp_name']
+
+			_gender=request.form['gender']
+			#_gender1=request.form['gender1']
+			#_gender2=request.form['gender2']
+			print _gender
+			#print _gender1
+			#print _gender2
+			_email=request.form['email']
+			_phone=request.form['phone']
+			_address=request.form['address']
+
+			_country=request.form['country']
+			_state=request.form['state']
+			_pincode=request.form['pin']			
+			_linkedin=request.form['linkedin']
+			_github=request.form['github']
+
+			cursor = conn.cursor()
+			cursor.execute("update emp_personal set emp_name='%s', email='%s', phone=%s, address='%s', country='%s', state='%s', pin=%s, dob='%s', gender='%s', linkedin='%s', github='%s' where emp_id=%s;"%(_empname,_email,_phone,_address,_country,_state,_pincode,_dob,_gender,_linkedin,_github,_user))
+			data = cursor.fetchall()
+			cursor.close()
+			if len(data) is 0:
+				conn.commit()
+				return redirect('/educational')
+			else:
+				return render_template('error.html',error = 'An error occurred!')
+		else:
+			return render_template('error.html',error = 'Unauthorized Access')
+	except Exception as e:
+		return render_template('error.html',error = str(e))
+	finally:   
+		conn.close()
 
 @app.route('/edu_details', methods=['POST'])
 def enter_details_edu():
@@ -607,7 +649,7 @@ def pdfview():
 	print data
 	length=len(data)
 	print length
-	ptext='<font size=24>II.Skill Details </font>'
+	ptext='<font size=24>III.Skill Details </font>'
 	Story.append(Paragraph(ptext,styles["Justify"]))
 	i=0
 	while(i<length):
@@ -625,7 +667,7 @@ def pdfview():
 	print data
 	length=len(data)
 	print length
-	ptext='<font size=24>II.Experience Details </font>'
+	ptext='<font size=24>IV.Experience Details </font>'
 	Story.append(Paragraph(ptext,styles["Justify"]))
 	i=0
 	while(i<length):
@@ -657,7 +699,7 @@ def pdfview():
 	Story.append(tbl)
 
 	doc.build(Story)
-	
+	conn.close()
 	url="hello%s.pdf"%num
 	webbrowser.open(url,new=2)
 	return redirect('/home')

@@ -192,20 +192,20 @@ h1 {
 								<label for="rad" style="display: table-cell;align-content: left"><input type = "radio" name = "gender" value="male" checked>Male</label>
 								<label for="rad" style="display: table-cell;align-content: left"><input type = "radio" name = "gender" value="others">Others</label>
 							{% elif(data[0][9]=="female") %}
-								<label for="rad" style="display: table-cell;align-content: left"><input type = "radio" name = "gender1" value="female" checked>Female</label>
-								<label for="rad" style="display: table-cell;align-content: left"><input type = "radio" name = "gender1" value="male">Male</label>
-								<label for="rad" style="display: table-cell;align-content: left"><input type = "radio" name = "gender1" value="others">Others</label>
+								<label for="rad" style="display: table-cell;align-content: left"><input type = "radio" name = "gender" value="female" checked>Female</label>
+								<label for="rad" style="display: table-cell;align-content: left"><input type = "radio" name = "gender" value="male">Male</label>
+								<label for="rad" style="display: table-cell;align-content: left"><input type = "radio" name = "gender" value="others">Others</label>
 							{% else %}
-								<label for="rad" style="display: table-cell;align-content: left"><input type = "radio" name = "gender2" value="female"/>Female</label>
-								<label for="rad" style="display: table-cell;align-content: left"><input type = "radio" name = "gender2" value="male">Male</label>
-								<label for="rad" style="display: table-cell;align-content: left"><input type = "radio" name = "gender2" value="others" checked>Others</label>
+								<label for="rad" style="display: table-cell;align-content: left"><input type = "radio" name = "gender" value="female"/>Female</label>
+								<label for="rad" style="display: table-cell;align-content: left"><input type = "radio" name = "gender" value="male">Male</label>
+								<label for="rad" style="display: table-cell;align-content: left"><input type = "radio" name = "gender" value="others" checked>Others</label>
 							{% endif %}
 						</div>
 						<div style = "width:100%;display:table">
 							<label for="email" style="display:table-cell; width:1px">Email&nbsp;&nbsp;</label>
 							<input type = "text" width = "20" name="email" id = "email" value="{{data[0][2]}}" placeholder = "Email address" style="display:table-cell; width:100%" ><br>
 							<label for="phone" style="display:table-cell; width:1px">&nbsp;&nbsp;Phone&nbsp;&nbsp;</label>
-							<input type = "text" value="" width = "20" name="phone" id = "phone" value="{{data[0][3]}}" placeholder = "Phone number" style="display:table-cell; width:100%" >
+							<input type = "text" width = "20" name="phone" id = "phone" value="{{data[0][3]}}" placeholder = "Phone number" style="display:table-cell; width:100%" >
 						</div><br>
 
 						<div style = "width:100%;display:table">
@@ -232,8 +232,7 @@ h1 {
 					</form>
 					</div><div id = "rightpanel"><div id = "img">Picture and upload picture link goes here</div></div>
 			</div>
-			{% endif %}
-
+			{% else %}
 			<div id = "wrapper">
 				<div id = "maincontent">
 					<br>
@@ -281,6 +280,7 @@ h1 {
 					</form>
 					</div><div id = "rightpanel"><div id = "img">Picture and upload picture link goes here</div></div>
 			</div>
+			{% endif %}
 	</body>
 </html>
 
